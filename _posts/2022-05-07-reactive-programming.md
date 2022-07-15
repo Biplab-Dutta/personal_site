@@ -1,12 +1,12 @@
 ---
+author: Biplab
 title: A Taste of Reactive Programming in Flutter with RxDart and flutter_bloc
 date: 2022-05-07 17:00:00 +545
 categories: [flutter, reactive programming]
 tags: [flutter, dart, reactive programming, rxdart, stream]
+image:
+  path: preview_images/reactive_programming.jpg
 ---
-
-![Reactive Programming](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kuk5hnesqsh0ef23mufu.jpg)
-*Image Source: [West Agile Labs](https://www.westagilelabs.com/blog/five-interesting-facts-about-reactive-programming-frameworks/)*
 
 When it comes to reactive programming, not many developers, especially junior developers feel comfortable with it. The base for reactive programming in Dart is **Stream**, a type in dart used to represent an asynchronous sequence of data. In this article, we will learn about what streams are, when to use them, and how to use them by building a simple flutter application and bringing everything into practice.
 
@@ -382,4 +382,5 @@ If you have anything to tell me, please do so. I will be looking forward to all 
 - [Twitter](https://twitter.com/b_plab98)
 
 Until next time, happy coding!!! 👨‍💻
+
 — Biplab Dutta
