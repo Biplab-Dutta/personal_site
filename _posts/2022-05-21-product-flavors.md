@@ -250,7 +250,7 @@ As you can see, we have `_AdminBody()` class and `_NonAdminBody()` class which w
 
 On running both app flavors, we will have two different apps created with a single codebase.
 
-![Final result product flavor Flutter](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s2o9iacidletjeyp4yv5.png)
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/henef2uvke22feglk2tp.png" width=300 height="500"/>
 
 ## Conclusion
 We learned how we can have two different apps created with different UIs using a single codebase. I hope this blog post will be helpful for some of you reading if you ever encounter a situation where you’d have to create a similar project.

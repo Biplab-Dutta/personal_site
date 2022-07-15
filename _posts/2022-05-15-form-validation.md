@@ -218,9 +218,9 @@ Either<ValueFailure, String> _validatePassword(String input) {
 ## Presentation Layer
 Now, we will begin working with our presentation layer. Let me show you the final result of our application.
 
-![flutter form validation demo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/796f898wzkv7fxxde3bz.gif)
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/796f898wzkv7fxxde3bz.gif" alt="flutter form validation demo" width=300 height="500"/>
 
-We will begin with creating our bloc.
+We will begin by creating our bloc.
 ### Event class
 Considering the events or actions that users can perform to interact with the UI, the events can be
 

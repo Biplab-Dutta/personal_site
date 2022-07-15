@@ -94,7 +94,7 @@ We will build a very simple application that will initially display a list of na
 
 This is what our final application looks like.
 
-![Flutter app](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s5z8h379yargqik2guh9.gif)
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s5z8h379yargqik2guh9.gif" alt="Flutter app" width=300 height="500"/>
 
 ## Creating flutter project
 First, create a new Flutter project and get rid of the default counter app.
