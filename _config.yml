@@ -86,29 +86,15 @@ theme_mode: dark
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: "https://media-exp1.licdn.com/dms/image/C5603AQFpESA2CLyu3A/profile-displayphoto-shrink_200_200/0/1622292133626?e=1663200000&v=beta&t=pFIuaKJjsFDcbohpXxbWcSkncwesqRTVmOuMCMoZh4I"
+avatar: "https://avatars.githubusercontent.com/u/63902683?v=4"
 
 # boolean type, the global switch for ToC in posts.
 toc: true
 
 comments:
-  active: # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
-  # The active options are as follows:
+  active: "disqus"
   disqus:
-    shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-  # utterances settings › https://utteranc.es/
-  utterances:
-    repo: # <gh-username>/<repo>
-    issue_term: # < url | pathname | title | ...>
-  # Giscus options › https://giscus.app
-  giscus:
-    repo: # <gh-username>/<repo>
-    repo_id:
-    category:
-    category_id:
-    mapping: # optional, default to 'pathname'
-    input_position: # optional, default to 'bottom'
-    lang: # optional, default to the value of `site.lang`
+    shortname: personal-blogging-site
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:
@@ -151,7 +137,7 @@ defaults:
       toc: true # Display TOC column in posts.
       # DO NOT modify the following parameter unless you are confident enough
       # to update the code of all other post links in this project.
-      # permalink: /posts/:title/
+      permalink: /posts/:title/
   - scope:
       path: _drafts
     values:
