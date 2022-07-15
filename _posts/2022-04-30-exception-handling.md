@@ -1,4 +1,5 @@
 ---
+author: Biplab
 title: Exception Handling with Functional Programming in Flutter (Either type)
 date: 2022-04-30 14:00:00 +0545
 categories: [flutter, functional programming]
