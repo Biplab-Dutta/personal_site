@@ -51,7 +51,7 @@ Because we will have two different apps created, we want two different names for
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.product_flavor_demo">
    <application
-        android:label="@string/app_name"      // Edit this line
+        android:label="@string/app_name"      <!-- Edit this line -->
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
