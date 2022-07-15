@@ -2,7 +2,7 @@
 author: Biplab
 title: A Taste of Reactive Programming in Flutter with RxDart and flutter_bloc
 date: 2022-05-07 17:00:00 +545
-categories: [flutter, reactive programming]
+categories: [flutter]
 tags: [flutter, dart, reactive programming, rxdart, stream]
 image:
   path: https://raw.githubusercontent.com/Biplab-Dutta/personal_site/main/preview_images/reactive_programming.jpg
