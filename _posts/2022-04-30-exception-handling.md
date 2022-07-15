@@ -274,7 +274,7 @@ There are many other ways to effectively handle exceptions in our Flutter projec
 ### Conclusion
 In this article, you saw how to implement network requests in Flutter in a proper manner. We learned how we can use [dio](https://pub.dev/packages/dio), [freezed](https://pub.dev/packages/freezed), [dartz](https://pub.dev/packages/dartz), and a few other architectural overviews that can help us in making our app more maintainable, and testable and ultimately help us in becoming a better developer.
 
-Also, this was my very first blog on Dev. I know there is room for improvement and therefore, I seek feedback from the community.
+Also, this happens to be my very first blog. I know there are room for improvements and therefore, I seek feedback from the community.
 
 If you wish to see some Flutter projects with proper architecture, follow me on [GitHub](https://github.com/Biplab-Dutta/). I am also active on Twitter [@b_plab](https://twitter.com/b_plab98).
 
