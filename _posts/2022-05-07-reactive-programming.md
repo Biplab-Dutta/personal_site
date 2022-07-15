@@ -5,7 +5,7 @@ date: 2022-05-07 17:00:00 +545
 categories: [flutter, reactive programming]
 tags: [flutter, dart, reactive programming, rxdart, stream]
 image:
-  path: preview_images/reactive_programming.jpg
+  path: https://raw.githubusercontent.com/Biplab-Dutta/personal_site/main/preview_images/reactive_programming.jpg
 ---
 
 When it comes to reactive programming, not many developers, especially junior developers feel comfortable with it. The base for reactive programming in Dart is **Stream**, a type in dart used to represent an asynchronous sequence of data. In this article, we will learn about what streams are, when to use them, and how to use them by building a simple flutter application and bringing everything into practice.
