@@ -29,7 +29,7 @@ description: >- # used by seo meta and the atom feed
   My name is Biplab Dutta. I am from Nepal working as a mobile applicationd developer (native Android and Flutter)
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ""
+url: "https://biplabdutta.com.np"
 
 github:
   username: Biplab-Dutta # change to your github username
@@ -37,20 +37,21 @@ github:
 twitter:
   username: b_plab98 # change to your twitter username
 
-linkedin:
-  username: biplab-dutta-43774717a # change to your twitter username
+# linkedin:
+#   username: biplab-dutta-43774717a # change to your linkedin username
+
+# stack-overflow:
+#   username: Biplab Dutta
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Biplab Dutta # change to your email address
+  name: Biplab Dutta
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your twitter homepage
-    - https://github.com/username # change to your github homepage
-    # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://twitter.com/b_plab98 # change to your twitter homepage
+
+    - https://github.com/Biplab-Dutta # change to your github homepage
 
 google_site_verification: # fill in to your verification string
 
@@ -75,7 +76,7 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode: # [light|dark]
+theme_mode: dark
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
@@ -85,7 +86,7 @@ theme_mode: # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: "https://media-exp1.licdn.com/dms/image/C5603AQFpESA2CLyu3A/profile-displayphoto-shrink_200_200/0/1622292133626?e=1663200000&v=beta&t=pFIuaKJjsFDcbohpXxbWcSkncwesqRTVmOuMCMoZh4I"
 
 # boolean type, the global switch for ToC in posts.
 toc: true
@@ -160,7 +161,7 @@ defaults:
       type: tabs # see `site.collections`
     values:
       layout: page
-      # permalink: /:title/
+      permalink: /:title/
   - scope:
       path: assets/img/favicons
     values:
