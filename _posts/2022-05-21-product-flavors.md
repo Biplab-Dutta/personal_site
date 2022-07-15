@@ -259,6 +259,9 @@ If you wish to see some Flutter projects with proper architecture, follow me on 
 
 **[Source Code](https://github.com/Biplab-Dutta/product_flavor_demo)**
 
+**Credit:**
+[Glitch](https://glitchyhitchy.medium.com/) for the preview image.
+
 **My Socials:**
 
 - [GitHub](https://github.com/Biplab-Dutta)

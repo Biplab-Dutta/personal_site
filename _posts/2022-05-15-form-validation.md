@@ -390,6 +390,9 @@ If you wish to see some Flutter projects with proper architecture, follow me on 
 
 **[Source Code](https://github.com/Biplab-Dutta/form-validation)**
 
+**Credit:**
+[dormoshe.io](https://dormoshe.io/trending-news/form-validation-in-flutter-16654?utm_source=facebook&utm_campaign=facebook) for the preview image.
+
 **My Socials:**
 
 - [GitHub](https://github.com/Biplab-Dutta)

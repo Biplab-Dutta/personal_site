@@ -373,6 +373,9 @@ This article aimed at making Streams and Reactive Programming easier to get used
 
 If you have anything to tell me, please do so. I will be looking forward to all the feedback I receive. You can also follow me on Twitter at [@b_plab98](https://twitter.com/b_plab98) where I tweet about Flutter and Android.
 
+**Credit:**
+[West Agile Labs](https://www.westagilelabs.com/blog/five-interesting-facts-about-reactive-programming-frameworks/) for the preview image.
+
 ## My Socials
 
 - [GitHub](https://github.com/Biplab-Dutta/)
