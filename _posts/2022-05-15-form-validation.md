@@ -382,7 +382,7 @@ Now all that is left is to create two TextFields and wrap them with the BlocBuil
 To check the remaining UI source code, I’d suggest you take a look at this [repo](https://github.com/Biplab-Dutta/form-validation) which contains the source code for the entire project.
 
 ## Conclusion
-This article demonstrated how you can perform form validation in Flutter using proper techniques and without having any business logic in the UI. There are several other ways to do the same thing. One of them happens to be [formz](https://github.com/Biplab-Dutta/formz) package.
+This article demonstrated how you can perform form validation in Flutter using proper techniques and without having any business logic in the UI. There are several other ways to do the same thing. One of them happens to be [formz](https://pub.dev/packages/formz) package.
 
 I hope after reading this article those who have been writing their validation logic in the UI, would now have such logic in the domain layer, keeping your presentation layer neat.
 
