@@ -6,12 +6,12 @@ categories: [flutter]
 tags: [flutter, dart, functional programming, either]
 ---
 
-> _If you wish to read this article in Bahasa Indonesia, you can find it [here](https://t.co/rpfOpMm3o0). [Yunus Afghoni](https://twitter.com/ghonijee?s=20&t=lMK4d9e4jKn7jVCN6_7iLQ) has done good work taking this article as a reference and translating it to Bahasa Indonesia, with some subtle changes._
-{: .prompt-info }
-
 Every application needs some data sources to receive the data and display it in the UI. So, it becomes very crucial how we, as developers, perform network requests. Handling API responses in an effective manner also determine the success or failure of our application.
 
 In this post, we will see how to perform such network requests effectively using [dio](https://pub.dev/packages/dio) and a bit of functional programming using the [dartz](https://pub.dev/packages/dartz) package. This will allow our overall architecture to remain consistent while making our project scalable and maintainable.
+
+> _If you wish to read this article in Bahasa Indonesia, you can find it [here](https://t.co/rpfOpMm3o0). [Yunus Afghoni](https://twitter.com/ghonijee?s=20&t=lMK4d9e4jKn7jVCN6_7iLQ) has done good work taking this article as a reference and translating it to Bahasa Indonesia, with some subtle changes._
+{: .prompt-info }
 
 To follow along, make sure to include [dio](https://pub.dev/packages/dio) and [dartz](https://pub.dev/packages/dartz) as your dependencies in the `pubspec.yaml` file.
 
