@@ -11,6 +11,7 @@ image:
 Every mobile app user prefers having an option to choose between multiple themes. Having decent themes available is also very crucial in enhancing the user experience. So, how can we do it effectively in Flutter? How can we have different configs set for each theme? This article ensures that you get a proper understanding of it and I’ll also talk a bit regarding `Stream` in Dart.
 
 ## Demo
+
 Let’s take a look at our final app.
 
 ![flutter-theme-switching-demo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bs1jwa9pgp858t2gyiy9.gif)
@@ -18,12 +19,15 @@ Let’s take a look at our final app.
 As we can see in the GIF, our app allows us to switch between dark theme and light theme. Also, the icon on the floating action button changes dynamically. And the chosen theme is persisted which can be witnessed in every app launch.
 
 ## Dependencies
+
 Before we begin working on the code, let’s first include some external packages that we will need. Include [flutter_bloc](https://pub.dev/packages/flutter_bloc), [shared_preferences](https://pub.dev/packages/shared_preferences), and [equatable](https://pub.dev/packages/equatable) as your dependencies in `pubspec.yaml` file.
 
 ## Let’s Code 👨‍💻
+
 Since this is a very simple app, I won’t be concerned about app architecture in this article. You can check my other articles if you want to learn about app architecture.
 
 ### Theme Configurations
+
 First, start a new flutter project and get rid of the default counter app. Then inside the lib folder, create a file `app_theme.dart`.
 
 ```dart
@@ -63,6 +67,7 @@ abstract class AppTheme {
 ```
 
 ### Data Layer/Theme Repository
+
 Then create a `theme_repository.dart` file inside the lib directory and paste the following code.
 
 ```dart
@@ -93,6 +98,7 @@ class ThemeRepository implements ThemePersistence {
   void dispose() {}
 }
 ```
+
 As you can see, we created an abstract class `ThemePersistence`, and another class `ThemeRepository` that implements the abstract class. Also, we created an enum `CustomTheme` that has two values — `light` and `dark` because these are the themes that our app will have. The `ThemeRepository` class depends on the `SharedPreferences` instance that we will use for theme persistence.
 
 Also, we can see that `getTheme()` returns a `Stream` and not a `Future`. The main reason behind using Stream is that listeners of this Stream can immediately be notified of the theme change and we needn’t call the `getTheme()` method again and again.
@@ -142,6 +148,7 @@ class ThemeRepository implements ThemePersistence {
   void dispose() => _controller.close();
 }
 ```
+
 We initialized a `StreamController` which will act as a manager for our `Stream<CustomTheme>`. The `saveTheme()` method is straightforward. First, it adds the theme that we want to save to the stream and then calls `_setValue()` which will persist the theme. The `_setValue()` method uses API from `SharedPreferences` to persist the chosen theme.
 
 Everything looks fine. But if you see it carefully, the method `getTheme()` yields the stream from the controller. But initially, as the app is launched, there would be no stream in the controller. Then how do we deal with it?
@@ -213,9 +220,11 @@ class ThemeRepository implements ThemePersistence {
   void dispose() => _controller.close();
 }
 ```
+
 Also, you may have noticed I used a `CustomTheme` enum that I created in this file instead of using `ThemeMode` which is available in Flutter. The reason is simply to avoid including the material package in the data layer of our project as `ThemeMode` comes from the material package. In my opinion, the components of the material package are associated with the presentation layer and not the data layer.
 
 ### Cubits/ViewModel/State Management
+
 Now, we will create a `ThemeCubit` and `ThemeClass` class that will be responsible for our state handling. Create a folder in the lib directory and name it `them_cubit`. Inside `theme_cubit`, create two dart files — `theme_cubit.dart` and `theme_state.dart`.
 
 ```dart
@@ -297,9 +306,11 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 }
 ```
+
 The code is self-explanatory and I have added all the necessary explanations through comments in the above code. Be sure to go through them.
 
 ### main.dart
+
 Let’s add some code to the `main.dart` file.
 
 ```dart
@@ -323,6 +334,7 @@ Future<void> main() async {
 ```
 
 ### App Widget
+
 Next, create a `app.dart` file in the lib directory and paste the following code.
 
 ```dart
@@ -377,6 +389,7 @@ class AppView extends StatelessWidget {
 ```
 
 ### HomePage
+
 Create a file `home_page.dart` and add the following code.
 
 ```dart
@@ -427,10 +440,13 @@ class HomePage extends StatelessWidget {
   }
 }
 ```
+
 ## Other solutions
+
 There are many other ways of doing the same thing that I showed in this article. You could also use [hydrated_bloc](https://pub.dev/packages/hydrated_bloc) instead of cubits to manage the state and persist it. However, I wanted to show you how you could have done the persisting if you were working with other state management solutions other than flutter_bloc.
 
 ## Conclusion
+
 This article showed how we can include theme switching and persisting feature in our Flutter app using the best practices. I hope you all got to learn from my article and if there’s any feedback for me, drop a comment. I’ll be sure to upload another article in a few days again.
 
 If you wish to see some Flutter projects with proper architecture, follow me on [GitHub](https://github.com/Biplab-Dutta). I am also active on Twitter [@b_plab](https://twitter.com/b_plab98).

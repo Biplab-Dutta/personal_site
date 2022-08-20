@@ -18,6 +18,7 @@ To follow along, make sure to include [dio](https://pub.dev/packages/dio) and [d
 ### Dio API Calls
 
 First thing first, let’s take a look at how I used to make network requests in Flutter a while back 😂 when I was still a beginner.
+
 ```dart
 class FeedRemoteDataSource {
   FeedRemoteDataSource(Dio dio) : _dio = dio;
@@ -35,6 +36,7 @@ class FeedRemoteDataSource {
   }
 }
 ```
+
 This was how I did my network request returning a List of something no matter what. It worked fine for small projects; however, it didn’t take much longer for me to realize that I had been doing it wrong. As you can see in the code snippet above, I was always returning a `List`, irrespective of the status code.
 
 In real-world projects, we are likely to work in a multi-layered architecture which means our entire project could be divided into multiple layers.
@@ -71,7 +73,9 @@ So, our data layer would consist of three parts:
 - **Repository**: The repository is what the view model communicates with. A repository also acts as a single gateway for data coming from several data sources. A repository is thus, essential in maintaining a single source of truth.
 
 ### Data Transfer Objects (DTOs)
+
 First, let’s see how our `feed_dto.dart` would look like.
+
 ```dart
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';
@@ -94,18 +98,22 @@ class FeedDTO with _$FeedDTO {
   Feed toDomain() => Feed(title: title);
 }
 ```
+
 You will also need to have [freezed](https://pub.dev/packages/freezed) included in your project as a dev-dependency along with [build_runner](https://pub.dev/packages/build_runner). Also, include [freezed_annotation](https://pub.dev/packages/freezed_annotation) as a dependency.
 
 > _freezed is a code generator for data-classes/unions/pattern-matching/cloning._
 {: .prompt-info }
 
 Next, you will need to have the required code generated which [freezed](https://pub.dev/packages/freezed) and [build_runner](https://pub.dev/packages/build_runner) will take care of. Run the following command to initialize code generation.
+
 ```bash
 flutter pub run build_runner watch --delete-conflicting-outputs
 ```
 
 ### Data Sources
+
 In this section, we will perform our network request using the [dio](https://pub.dev/packages/dio) package. Any exceptions that need to be thrown will be thrown in this section which then is handled by the **Repository**.
+
 ```dart
 class FeedRemoteDataSource {
   FeedRemoteDataSource(
@@ -142,6 +150,7 @@ extension DioErrorX on DioError {
 ```
 
 ### Repository
+
 This is the main gateway for the data coming from several data sources. Also, the **ViewModel** communicates with the **Repository** to get the data and display it in the UI. And the conversion between DTO and the domain-level entity is also performed here.
 
 Now, how is our repository going to make it easy for us to handle exceptions so as to have a maintainable architecture? It’s simple. We use **[Either](https://medium.com/disney-streaming/option-either-state-and-io-imperative-programming-in-a-functional-world-8e176049af81)**.
@@ -152,6 +161,7 @@ Now, how is our repository going to make it easy for us to handle exceptions so 
 It might be difficult to get a grasp on `Either` just by looking at its definition. So, let’s take a look at our repository implementation which will help us understand `Either` easily.
 
 The `FeedRepositoryImpl` class implements `FeedRepository` which is a simple abstract class. The `FeedRepositoryImpl` is dependent on our `FetchRemoteDataSource`.
+
 ```dart
 abstract class FeedRepository {
   Future<Either<Failure, List<Feed>>> getFeeds();
@@ -213,6 +223,7 @@ So, our repository implementation is pretty straightforward now. If the remote d
 This way, we also reduce the risk of the [error bubble](https://www.linkedin.com/pulse/error-handling-let-bubble-up-mihael-schmidt/).
 
 ### BLoC / ViewModel
+
 So, how exactly are we going to deal with the obtained result from the **repository** in the presentation layer? For that, we will need to create a **bloc** that will be dependent on the **repository**. I prefer using [flutter_bloc](https://pub.dev/packages/flutter_bloc) for state management purposes.
 
 > _You needn’t use flutter_bloc to follow along. Any state management solution is fine._ 👍️
@@ -227,6 +238,7 @@ class TimelineEvent with _$TimelineEvent {
   // add some other events too as desired...
 }
 ```
+
 ```dart
 part of 'timeline_bloc.dart';
 
@@ -237,6 +249,7 @@ class TimelineState with _$TimelineState {
   const factory TimelineState.failed() = _Failed;
 }
 ```
+
 ```dart
 class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   TimelineBloc(
@@ -263,15 +276,18 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   }
 }
 ```
+
 In the `_onFeedFetched()` method above, the instance of the class implementing **FeedRepository** (the abstract class) is used to call the `getFeeds()` method which returns an `Either` type (stored in `fetchedFeed`). We use `fold` method to emit proper state depending on the result of `_repository.getFeeds().`
 The `fold` accepts to functions as its argument. The first function is used to perform an action when `Failure` is returned, whereas the second function is used to perform an action when a `Success` is returned. `Success` in our case refers to `List<Feed>`.
 
 Now, from our UI, we can use [BlocBuilder](https://pub.dev/packages/flutter_bloc#blocbuilder) to rebuild our widget on certain state changes.
 
 ### Other Solutions
+
 There are many other ways to effectively handle exceptions in our Flutter project. We can also rely on sealed classes. A good example of it can be found [here](https://getstream.io/blog/modeling-retrofit-responses/).
 
 ### Conclusion
+
 In this article, you saw how to implement network requests in Flutter in a proper manner. We learned how we can use [dio](https://pub.dev/packages/dio), [freezed](https://pub.dev/packages/freezed), [dartz](https://pub.dev/packages/dartz), and a few other architectural overviews that can help us in making our app more maintainable, and testable and ultimately help us in becoming a better developer.
 
 Also, this happens to be my very first blog. I know there are room for improvements and therefore, I seek feedback from the community.

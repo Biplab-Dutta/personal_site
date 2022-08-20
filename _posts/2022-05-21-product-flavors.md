@@ -15,6 +15,7 @@ It would be costly for companies to hire two different teams to create two diffe
 As the name suggests, a product flavor (or a product variant) is a way to create multiple variants of your app from a single codebase. We can deploy these different apps independently in the relevant stores as well.
 
 ## Implementation
+
 Now, we will begin creating our flavors. We will have an admin flavor and a non-admin flavor. I will keep the apps very simple and have them display a text saying **`This is the admin UI`** and **`This is the non-admin UI`**. In a real-world application, you can follow the same techniques that I will show you and have UIs accordingly the way you want.
 
 First, we will add a configuration in the app-level `build.gradle` file inside the `android` block.
@@ -45,6 +46,7 @@ android {
 }
 
 ```
+
 Because we will have two different apps created, we want two different names for each of our applications. To do so, we will have to navigate to `/android/app/src/main/AndroidManifest.xml` file and edit `android:label`.
 
 ```xml
@@ -96,7 +98,6 @@ void main() {
 }
 ```
 
-
 ```dart
 // main_non_admin.dart
 
@@ -106,12 +107,15 @@ void main() {
   runApp(const MyApp());
 }
 ```
+
 We will create our `MyApp()` widget in a moment but let’s first take care of some other things.
 
 ### For VS Code Users
+
 If you are a VS Code user, then you need to follow some of the steps that I’ll show you now.
 
 First, create a `.vscode` folder in the root project directory. Then create a file `launch.json` inside it and add the following snippet.
+
 ```json
 {
     "version": "0.2.0",
@@ -145,11 +149,13 @@ First, create a `.vscode` folder in the root project directory. Then create a fi
     ]
 }
 ```
+
 Now, if you go to the `Run and Debug` option in your VS Code or hold <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>, you will see a drop-down menu. On clicking it, you should see an option to debug your two different app variants.
 
 ![vs code product flavor screenshot](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zo2s4i4u8411fra9bik7.png)
 
 ### For Android Studio Users
+
 If you use Android Studio then you need to follow some of the steps that I’ll show you now.
 
 Navigate to `Edit Configurations` option under the `Run` tab. It should open up a new window. Then you need to add configurations for each flavor.
@@ -157,6 +163,7 @@ Navigate to `Edit Configurations` option under the `Run` tab. It should open up 
 ![Debug Configuration Window Android Studio](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/i76t2x5afzwcnuwkbd11.png)
 
 In the `Dart entrypoint` option, add the path to `main_admin.dart` file using the browse option on the right-hand side. In the `Additional run args` option, add
+
 ```
 --flavor admin --dart-define=appType=admin
 ```
@@ -246,6 +253,7 @@ class _NonAdminBody extends StatelessWidget {
   }
 }
 ```
+
 As you can see, we have `_AdminBody()` class and `_NonAdminBody()` class which will help us render UIs depending on the app we are running.
 
 On running both app flavors, we will have two different apps created with a single codebase.
@@ -253,6 +261,7 @@ On running both app flavors, we will have two different apps created with a sing
 <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/henef2uvke22feglk2tp.png" width=300 height="500"/>
 
 ## Conclusion
+
 We learned how we can have two different apps created with different UIs using a single codebase. I hope this blog post will be helpful for some of you reading if you ever encounter a situation where you’d have to create a similar project.
 
 If you wish to see some Flutter projects with proper architecture, follow me on [GitHub](https://github.com/Biplab-Dutta). I am also active on Twitter [@b_plab](https://twitter.com/b_plab98).

@@ -11,6 +11,7 @@ image:
 When it comes to reactive programming, not many developers, especially junior developers feel comfortable with it. The base for reactive programming in Dart is **Stream**, a type in dart used to represent an asynchronous sequence of data. In this article, we will learn about what streams are, when to use them, and how to use them by building a simple flutter application and bringing everything into practice.
 
 ## Stream and StreamController
+
 Before anything, let’s first talk about Streams as I already told you that it lays the foundation for reactive programming. Simply put, you can consider Stream as a flow of data that arrives asynchronously, meaning you don’t exactly know when a certain data is going to arrive. It is represented as `Stream<T>` where T is any data type.
 
 Unlike Future, when you invoke a method returning Stream, the execution doesn’t get terminated once a result is **yield**ed (Stream’s equivalent to **return**). You will manually need to close the stream to terminate its operation.
@@ -28,16 +29,16 @@ Those parts of our application that are interested in our data stream need to li
 
 - **Broadcast Stream**: This type of stream allows any number of listeners.
 
-
 ## Reactive Programming
+
 Simply put, reactive programming is programming with asynchronous data streams.
 
-> _If the repository in the data layer returns data in the form of Stream (which the ViewModel(s) will listen to), you can consider that reactive repository._
+> *If the repository in the data layer returns data in the form of Stream (which the ViewModel(s) will listen to), you can consider that reactive repository.*
 {: .prompt-info }
 
 But how is it going to help us anyway? If this is what you have been thinking, let me demonstrate two images.
 
-> _A picture is worth a thousand words — Henrik Ibsen_
+> *A picture is worth a thousand words — Henrik Ibsen*
 {: .prompt-tip }
 
 ![Steps in performing Network Request](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ijfywt0dfdesaa2teb2w.png)
@@ -90,6 +91,7 @@ With this approach, we needn’t call methods like `loadData()` again and again 
 Now, we will begin building a simple application, that will put all of our understanding regarding Streams and the Reactive approach into practice.
 
 ## Demo
+
 We will build a very simple application that will initially display a list of names in a ListView. And we will add some more names but follow a reactive approach.
 
 This is what our final application looks like.
@@ -97,6 +99,7 @@ This is what our final application looks like.
 <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s5z8h379yargqik2guh9.gif" alt="Flutter app" width=300 height="500"/>
 
 ## Creating flutter project
+
 First, create a new Flutter project and get rid of the default counter app.
 Also, add [Equatable](https://pub.dev/packages/equatable) and [RxDart](https://pub.dev/packages/rxdart) packages to your `pubspec.yaml` file.
 
@@ -115,8 +118,11 @@ lib
 ```
 
 ## Development
+
 ### Domain Layer
+
 We will begin with the **Domain Layer** first. Inside the domain folder, create a file `models.dart` . And paste the following code.
+
 ```dart
 class User {
   final String name;
@@ -135,6 +141,7 @@ final allUsers = <User>[
 ```
 
 ### Data Layer
+
 Next, we will work on the **Data Layer**. Create two files `repository.dart` and `remote_data_source.dart` inside the data folder.
 
 Now, add the following code to `remote_data_source.dart` file.
@@ -155,6 +162,7 @@ class RemoteDataSource {
   }
 }
 ```
+
 The above code simply returns a `List<User>` which will be returned by the Repository. So, add the following code to `repository.dart` file.
 
 ```dart
@@ -211,6 +219,7 @@ class UserRepository {
   }
 }
 ```
+
 Here, the `UserRepository` is dependent on the `RemoteDataSource`. In the constructor body, we call `getUsers()` and the list of users is added to the **StreamController**.
 
 Also, we are using **BehaviorSubject** instead of a **StreamController**. BehaviorSubject comes from [RxDart](https://pub.dev/packages/rxdart) package. The package is simply an extension on Stream provided by Dart. Using BehaviorSubject, any new listeners when begin listening to the stream, they immediately get the lastly emitted Stream of data.
@@ -222,17 +231,18 @@ Also, notice how the `addUser()` method is implemented. We are simply adding the
 
 > _I have had one question in the past when I saw `Stream<List<User>>` being returned instead of `Stream<User>`. The main reasons for that are:_
 >
-> _When a new user arrives, we can’t tell if that should be at the top of our list or at the bottom, or somewhere in the middle._
+> *When a new user arrives, we can’t tell if that should be at the top of our list or at the bottom, or somewhere in the middle.*
 >
-> _And one major principle of the BLoC Pattern is to pass those data in the UI that will be represented in the UI and avoid having any additional business logic in the UI._
+> *And one major principle of the BLoC Pattern is to pass those data in the UI that will be represented in the UI and avoid having any additional business logic in the UI.*
 {: .prompt-info }
 
 ### Presentation Layer
+
 Now, we can work on the **Presentation Layer**. It will consist of bloc, widgets, and pages. So, create three folders inside the presentation folder and name them bloc, widgets, and pages respectively.
 
 We will begin with the bloc. Add three files — `user_bloc.dart`, `user_event.dart`, and `user_state.dart`.
 
-```dart 
+```dart
 // user_event.dart
 
 part of 'user_bloc.dart';
@@ -301,7 +311,6 @@ class UserState extends Equatable {
 }
 ```
 
-
 ```dart
 // user_bloc.dart
 
@@ -369,6 +378,7 @@ The event `UserRequested` is triggered as soon as the app is launched. The event
 Now to create UI, I'd suggest you check my [GitHub repo](https://github.com/Biplab-Dutta/flutter-stream-bloc-simplified) as the UI code is pretty simple and I don't want to create this article very long for the readers to read.
 
 ## Conclusion
+
 This article aimed at making Streams and Reactive Programming easier to get used to. The reactive Approach can help in having a relatively small codebase, easier to manage, and most importantly having our application truly reactive.
 
 If you have anything to tell me, please do so. I will be looking forward to all the feedback I receive. You can also follow me on Twitter at [@b_plab98](https://twitter.com/b_plab98) where I tweet about Flutter and Android.
