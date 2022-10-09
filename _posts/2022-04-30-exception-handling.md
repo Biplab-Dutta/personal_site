@@ -13,9 +13,23 @@ In this post, we will see how to perform such network requests effectively using
 > _If you wish to read this article in Bahasa Indonesia, you can find it [here](https://t.co/rpfOpMm3o0). [Yunus Afghoni](https://twitter.com/ghonijee?s=20&t=lMK4d9e4jKn7jVCN6_7iLQ) has done good work taking this article as a reference and translating it to Bahasa Indonesia, with some subtle changes._
 {: .prompt-info }
 
+<!-- omit in toc -->
+## Table of Contents
+
+<!-- Chirpy theme by default provides a table of contents for desktop users. I am creating one explicitly for mobile users. -->
+
+- [Dio API Calls](#dio-api-calls)
+- [Data Layer Architecture](#data-layer-architecture)
+  - [Data Transfer Objects (DTOs)](#data-transfer-objects-dtos)
+  - [Data Sources](#data-sources)
+- [Repository](#repository)
+- [BLoC / ViewModel](#bloc--viewmodel)
+- [Other Solutions](#other-solutions)
+- [Conclusion](#conclusion)
+
 To follow along, make sure to include [dio](https://pub.dev/packages/dio) and [dartz](https://pub.dev/packages/dartz) as your dependencies in the `pubspec.yaml` file.
 
-### Dio API Calls
+## Dio API Calls
 
 First thing first, let’s take a look at how I used to make network requests in Flutter a while back 😂 when I was still a beginner.
 
@@ -59,7 +73,7 @@ Since I talked about architecture, let me begin with what our architecture for t
 > _Before we proceed any further, let me tell you that this is not the best architecture or the only architecture you can go with. Different people/teams have their own ideas regarding architecture and their own ways of doing things. However, every architecture makes sure to separate UI and business logic which is why software architectures exist._
 {: .prompt-info }
 
-### Data Layer Architecture
+## Data Layer Architecture
 
 ![Data Layer Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bvp87zh3qnjv4a9pn3vo.png)
 *Data Layer (Image by [Reso Coder](https://twitter.com/resocoder))*
@@ -149,7 +163,7 @@ extension DioErrorX on DioError {
 }
 ```
 
-### Repository
+## Repository
 
 This is the main gateway for the data coming from several data sources. Also, the **ViewModel** communicates with the **Repository** to get the data and display it in the UI. And the conversion between DTO and the domain-level entity is also performed here.
 
@@ -222,7 +236,7 @@ So, our repository implementation is pretty straightforward now. If the remote d
 
 This way, we also reduce the risk of the [error bubble](https://www.linkedin.com/pulse/error-handling-let-bubble-up-mihael-schmidt/).
 
-### BLoC / ViewModel
+## BLoC / ViewModel
 
 So, how exactly are we going to deal with the obtained result from the **repository** in the presentation layer? For that, we will need to create a **bloc** that will be dependent on the **repository**. I prefer using [flutter_bloc](https://pub.dev/packages/flutter_bloc) for state management purposes.
 
@@ -282,11 +296,11 @@ The `fold` accepts to functions as its argument. The first function is used to p
 
 Now, from our UI, we can use [BlocBuilder](https://pub.dev/packages/flutter_bloc#blocbuilder) to rebuild our widget on certain state changes.
 
-### Other Solutions
+## Other Solutions
 
 There are many other ways to effectively handle exceptions in our Flutter project. We can also rely on sealed classes. A good example of it can be found [here](https://getstream.io/blog/modeling-retrofit-responses/).
 
-### Conclusion
+## Conclusion
 
 In this article, you saw how to implement network requests in Flutter in a proper manner. We learned how we can use [dio](https://pub.dev/packages/dio), [freezed](https://pub.dev/packages/freezed), [dartz](https://pub.dev/packages/dartz), and a few other architectural overviews that can help us in making our app more maintainable, and testable and ultimately help us in becoming a better developer.
 
@@ -294,7 +308,7 @@ Also, this happens to be my very first blog. I know there are room for improveme
 
 If you wish to see some Flutter projects with proper architecture, follow me on [GitHub](https://github.com/Biplab-Dutta/). I am also active on Twitter [@b_plab](https://twitter.com/b_plab98).
 
-### My Socials
+**My Socials:**
 
 - [GitHub](https://github.com/Biplab-Dutta/)
 

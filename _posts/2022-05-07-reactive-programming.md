@@ -6,9 +6,26 @@ categories: [flutter]
 tags: [flutter, dart, reactive programming, rxdart, stream]
 image:
   path: https://raw.githubusercontent.com/Biplab-Dutta/personal_site/main/preview_images/reactive_programming.jpg
+  alt: Preview Image Credit - West Agile Labs
 ---
 
 When it comes to reactive programming, not many developers, especially junior developers feel comfortable with it. The base for reactive programming in Dart is **Stream**, a type in dart used to represent an asynchronous sequence of data. In this article, we will learn about what streams are, when to use them, and how to use them by building a simple flutter application and bringing everything into practice.
+
+<!-- omit in toc -->
+## Table of Contents
+
+<!-- Chirpy theme by default provides a table of contents for desktop users. I am creating one explicitly for mobile users. -->
+
+- [Stream and StreamController](#stream-and-streamcontroller)
+- [Reactive Programming](#reactive-programming)
+- [Demo](#demo)
+- [Creating flutter project](#creating-flutter-project)
+- [Development](#development)
+  - [Domain Layer](#domain-layer)
+  - [Data Layer](#data-layer)
+  - [Presentation Layer](#presentation-layer)
+- [Conclusion](#conclusion)
+- [Credit](#credit)
 
 ## Stream and StreamController
 
@@ -383,10 +400,7 @@ This article aimed at making Streams and Reactive Programming easier to get used
 
 If you have anything to tell me, please do so. I will be looking forward to all the feedback I receive. You can also follow me on Twitter at [@b_plab98](https://twitter.com/b_plab98) where I tweet about Flutter and Android.
 
-**Credit:**
-[West Agile Labs](https://www.westagilelabs.com/blog/five-interesting-facts-about-reactive-programming-frameworks/) for the preview image.
-
-## My Socials
+**My Socials:**
 
 - [GitHub](https://github.com/Biplab-Dutta/)
 
@@ -397,3 +411,7 @@ If you have anything to tell me, please do so. I will be looking forward to all 
 Until next time, happy coding!!! 👨‍💻
 
 — Biplab Dutta
+
+## Credit
+
+[West Agile Labs](https://www.westagilelabs.com/blog/five-interesting-facts-about-reactive-programming-frameworks/) for the preview image.

@@ -6,6 +6,7 @@ categories: [flutter]
 tags: [flutter, dart, product flavors, build variants]
 image:
   path: https://raw.githubusercontent.com/Biplab-Dutta/personal_site/main/preview_images/product_flavor.png
+  alt: Preview Image Credit - Glitch
 ---
 
 Have you ever wondered how some mobile applications have admin and non-admin variants? The admin app has different UIs than the non-admin ones. Or have you seen some apps on the Play Store or App Store with premium and freemium versions? So, how do developers actually do it? How do they create multiple variants of the same project? Do they manage multiple codebases? Is there one team responsible for developing one variant and another team developing the other variant with 2 different codebases? And a clear and short answer to that is **NO**.
@@ -13,6 +14,17 @@ Have you ever wondered how some mobile applications have admin and non-admin var
 It would be costly for companies to hire two different teams to create two different app variants. So, how is it possible? And unsurprisingly, the answer to that is using **[Product Flavor](https://developer.android.com/studio/build/build-variants#product-flavors)**.
 
 As the name suggests, a product flavor (or a product variant) is a way to create multiple variants of your app from a single codebase. We can deploy these different apps independently in the relevant stores as well.
+
+<!-- omit in toc -->
+## Table of Contents
+
+<!-- Chirpy theme by default provides a table of contents for desktop users. I am creating one explicitly for mobile users. -->
+
+- [Implementation](#implementation)
+  - [For VS Code Users](#for-vs-code-users)
+  - [For Android Studio Users](#for-android-studio-users)
+- [Conclusion](#conclusion)
+- [Credit](#credit)
 
 ## Implementation
 
@@ -268,9 +280,6 @@ If you wish to see some Flutter projects with proper architecture, follow me on 
 
 **[Source Code](https://github.com/Biplab-Dutta/product_flavor_demo)**
 
-**Credit:**
-[Glitch](https://glitchyhitchy.medium.com/) for the preview image.
-
 **My Socials:**
 
 - [GitHub](https://github.com/Biplab-Dutta)
@@ -282,3 +291,7 @@ If you wish to see some Flutter projects with proper architecture, follow me on 
 Until next time, happy coding!!! 👨‍💻
 
 — Biplab Dutta
+
+## Credit
+
+[Glitch](https://glitchyhitchy.medium.com/) for the preview image.

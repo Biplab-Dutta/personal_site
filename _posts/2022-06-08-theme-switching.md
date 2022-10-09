@@ -6,9 +6,28 @@ categories: [flutter]
 tags: [flutter, dart, flutter_bloc, stream, cubits, themes]
 image:
   path: https://raw.githubusercontent.com/Biplab-Dutta/personal_site/main/preview_images/theme_switching.jpg
+  alt: Preview Image Credit - raywenderlich.com
 ---
 
 Every mobile app user prefers having an option to choose between multiple themes. Having decent themes available is also very crucial in enhancing the user experience. So, how can we do it effectively in Flutter? How can we have different configs set for each theme? This article ensures that you get a proper understanding of it and I’ll also talk a bit regarding `Stream` in Dart.
+
+<!-- omit in toc -->
+## Table of Contents
+
+<!-- Chirpy theme by default provides a table of contents for desktop users. I am creating one explicitly for mobile users. -->
+
+- [Demo](#demo)
+- [Dependencies](#dependencies)
+- [Let’s Code 👨‍💻](#lets-code-)
+  - [Theme Configurations](#theme-configurations)
+  - [Data Layer/Theme Repository](#data-layertheme-repository)
+  - [Cubits/ViewModel/State Management](#cubitsviewmodelstate-management)
+  - [main.dart](#maindart)
+  - [App Widget](#app-widget)
+  - [HomePage](#homepage)
+- [Other solutions](#other-solutions)
+- [Conclusion](#conclusion)
+- [Credit](#credit)
 
 ## Demo
 
@@ -453,9 +472,6 @@ If you wish to see some Flutter projects with proper architecture, follow me on 
 
 **[Source Code for the project in this article](https://github.com/Biplab-Dutta/flutter_theme_switcher)**
 
-**Credit:**
-[raywenderlich.com](https://www.raywenderlich.com/16628777-theming-a-flutter-app-getting-started) for the preview image.
-
 **My Socials:**
 
 - [GitHub](https://github.com/Biplab-Dutta)
@@ -467,3 +483,7 @@ If you wish to see some Flutter projects with proper architecture, follow me on 
 Until next time, happy coding!!! 👨‍💻
 
 — Biplab Dutta
+
+## Credit
+
+[raywenderlich.com](https://www.raywenderlich.com/16628777-theming-a-flutter-app-getting-started) for the preview image.

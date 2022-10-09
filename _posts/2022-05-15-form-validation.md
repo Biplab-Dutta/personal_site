@@ -6,6 +6,7 @@ categories: [flutter]
 tags: [flutter, dart, functional programming, either, flutter_bloc]
 image:
   path: https://raw.githubusercontent.com/Biplab-Dutta/personal_site/main/preview_images/form_validation.jpg
+  alt: Preview Image Credit - DorMoshe
 ---
 
 Dealing with forms is a very common task that we encounter as mobile application developers. With forms come form validation. It is necessary to show relevant warnings to the users when they don’t fill-up the form as they were supposed to. In order to do so, we need to write certain validation logic. However, the declarative UI approach in flutter results in many developers writing their validation logic right in the UI code which is **BAD, VERY BAD**.
@@ -14,6 +15,20 @@ Are you writing your validation logic in the UI? If yes, then this article is fo
 
 > _The approach that I will be sharing and which I often use in my personal projects is inspired by [Reso Coder](https://www.youtube.com/c/ResoCoder)’s tutorial on [Domain-driven design](https://www.youtube.com/playlist?list=PLB6lc7nQ1n4iS5p-IezFFgqP6YvAJy84U)._
 {: .prompt-info }
+
+<!-- omit in toc -->
+## Table of Contents
+
+<!-- Chirpy theme by default provides a table of contents for desktop users. I am creating one explicitly for mobile users. -->
+
+- [Form Validation in the UI (Bad Approach)](#form-validation-in-the-ui-bad-approach)
+- [Domain Layer](#domain-layer)
+- [Presentation Layer](#presentation-layer)
+  - [Event class](#event-class)
+  - [State class](#state-class)
+  - [Bloc](#bloc)
+- [Conclusion](#conclusion)
+- [Credit](#credit)
 
 ## Form Validation in the UI (Bad Approach)
 
@@ -415,9 +430,6 @@ If you wish to see some Flutter projects with proper architecture, follow me on 
 
 **[Source Code](https://github.com/Biplab-Dutta/form-validation)**
 
-**Credit:**
-[dormoshe.io](https://dormoshe.io/trending-news/form-validation-in-flutter-16654?utm_source=facebook&utm_campaign=facebook) for the preview image.
-
 **My Socials:**
 
 - [GitHub](https://github.com/Biplab-Dutta)
@@ -429,3 +441,7 @@ If you wish to see some Flutter projects with proper architecture, follow me on 
 Until next time, happy coding!!! 👨‍💻
 
 — Biplab Dutta
+
+## Credit
+
+[dormoshe.io](https://dormoshe.io/trending-news/form-validation-in-flutter-16654?utm_source=facebook&utm_campaign=facebook) for the preview image.
