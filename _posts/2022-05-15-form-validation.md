@@ -13,7 +13,7 @@ Dealing with forms is a very common task that we encounter as mobile application
 
 Are you writing your validation logic in the UI? If yes, then this article is for you. I will be talking about a proper way how can deal with form validation that doesn’t just work but is architecturally clean and reasonable.
 
-> _The approach that I will be sharing and which I often use in my personal projects is inspired by [Reso Coder](https://www.youtube.com/c/ResoCoder)’s tutorial on [Domain-driven design](https://www.youtube.com/playlist?list=PLB6lc7nQ1n4iS5p-IezFFgqP6YvAJy84U)._
+> _The approach that I will be sharing and which I often use in my personal projects is inspired by [Reso Coder][Reso Coder Youtube]’s tutorial on [Domain-driven design][DDD video]._
 {: .prompt-info }
 
 <!-- omit in toc -->
@@ -90,7 +90,7 @@ As you can see, this is how someone would perform form validation with all valid
 
 Now, if you are further reading this article, I assume you agree with me. Now let’s take a look at how to perform form validation — the right way.
 
-Before anything, let’s add some dependencies and dev-dependencies that we will require for this project. You will be needing [dartz](https://pub.dev/packages/dartz), [equatable](https://pub.dev/packages/equatable), [flutter_bloc](https://pub.dev/packages/flutter_bloc), and [freezed_annotation](https://pub.dev/packages/freezed_annotation) as your dependencies. Also, [build_runner](https://pub.dev/packages/build_runner) and [freezed](https://pub.dev/packages/freezed) as your dev-dependencies.
+Before anything, let’s add some dependencies and dev-dependencies that we will require for this project. You will be needing [dartz][], [equatable][], [flutter_bloc][], and [freezed_annotation][] as your dependencies. Also, [build_runner][] and [freezed][] as your dev-dependencies.
 
 ## Domain Layer
 
@@ -117,6 +117,8 @@ Syntactically, it is fine. There’s nothing wrong with what we have done here. 
 
 And the answer to that is creating `EmailAddress` and `Password` class. Having a class for each attribute will allow us to write some custom logic as well which we will see in a moment.
 
+{: file='email_address.dart'}
+
 ```dart
 class EmailAddress {
   const EmailAddress(this.value);
@@ -126,10 +128,12 @@ class EmailAddress {
 
 Now, we have a `EmailAddress` class with a value property of String type. But this is no different from what I showed earlier because the property `value` is still a `String` and any string can be passed to it. If we think about the property `value` , then it can either be a legitimate String value or an illegitimate String. For example, if the property value for `EmailAddress` class is `‘abc@gmail.com’` then, this is a legitimate string value for email. But if the property `value` is something like `‘abc’` then, it is an illegitimate string value.
 
-Now, what data type can we use for the property value so as to tell that it can have either a legitimate value or an illegitimate value? And the answer to that will be using **[Either](https://medium.com/disney-streaming/option-either-state-and-io-imperative-programming-in-a-functional-world-8e176049af81)** type from package [dartz](https://pub.dev/packages/dartz).
+Now, what data type can we use for the property value so as to tell that it can have either a legitimate value or an illegitimate value? And the answer to that will be using **[Either][]** type from package [dartz][].
 
 > _`Either` is an entity whose value can be of two different types, called left and right. By convention, `Right` is for the success case and `Left` is for the error one. It’s a common pattern in the functional community._
 {: .prompt-tip }
+
+{: file='email_address.dart'}
 
 ```dart
 class EmailAddress {
@@ -140,7 +144,9 @@ class EmailAddress {
 
 Now, using `Either` type, we can tell the compiler that value can possibly have one out of two types. In this case, the property value can either be of a `ValueFailure` type or a `String` type.
 
-Now, what is a `ValueFailure`? `ValueFailure` is simply a union to represent an invalid email string. We can create unions using [freezed](https://pub.dev/packages/freezed) package.
+Now, what is a `ValueFailure`? `ValueFailure` is simply a union to represent an invalid email string. We can create unions using [freezed][] package.
+
+{: file='value_failure.dart'}
 
 ```dart
 part 'value_failure.freezed.dart';
@@ -155,7 +161,7 @@ class ValueFailure with _$ValueFailure {
 
 Now, run the command
 
-```shell
+```bash
 flutter pub run build_runner watch --delete-conflicting-outputs
 ```
 
@@ -166,6 +172,8 @@ Fortunately, we can do so with the help of a **factory constructor**. First, we 
 
 > _We shall be using Regex to perform email validation._
 {: .prompt-tip }
+
+{: file='email_address.dart'}
 
 ```dart
 class EmailAddress extends Equatable {
@@ -199,11 +207,13 @@ We can see that if we try to do something like
 var email = EmailAddress('abc@gmail.com');
 ```
 
-then immediately, the passed in string will go through our validation logic and either return `ValueFailure` or `String`. Also, notice that we are extending our `EmailAddress` class with [Equatable](https://pub.dev/packages/equatable) to enforce value equality over reference equality which requires us to override the `props` getter.
+then immediately, the passed in string will go through our validation logic and either return `ValueFailure` or `String`. Also, notice that we are extending our `EmailAddress` class with [Equatable][] to enforce value equality over reference equality which requires us to override the `props` getter.
 
 And this is it.
 
 Now, we do the same thing for the `Password` class too. The validation logic will only differ and the rest remains the same. Also, we will need to add another redirecting constructor in our `ValueFailure` union class. Therefore, our `value_failure.dart` and `password.dart` would look like this:
+
+{: file='value_failure.dart'}
 
 ```dart
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -221,6 +231,8 @@ class ValueFailure with _$ValueFailure {
   }) = _Password;
 }
 ```
+
+{: file='password.dart'}
 
 ```dart
 class Password extends Equatable {
@@ -267,6 +279,8 @@ Considering the events or actions that users can perform to interact with the UI
 
 We will be creating a union class to represent events in our project.
 
+{: file='login_form_event.dart'}
+
 ```dart
 part of 'login_form_bloc.dart';
 
@@ -291,7 +305,9 @@ Also, on pressing the login button, a loading indicator appears until a response
 We don’t want the validation logic to kick in as soon as our app starts. Only once the login button is pressed, and if the email and password combination is invalid then we want the warnings to begin getting displayed. So, we also need a `showErrorMessage` `boolean` field that will be false by default.
 We also have a **_show/hide password_** option and the password will remain hidden (obscured) by default. So, we need an `obscurePassword` `boolean` field which will be true by default.
 After tapping on login, we will either succeed or fail. In this demo, we will show a snack bar if we log in when having a valid email and password. In a real-world application, you would show a snack bar with a proper message if the user is unable to log in or navigate to the home screen if login is successful. Since we will either succeed or fail the login process, we will need an `authSuccessOrFailure` `Either<AuthFailure, Unit>?` field. It is a nullable field because as the app starts we can’t tell if the login process is successful or not. So, if the `authSuccessOrFailure` is null that means we haven’t tried logging in yet.
-`Unit` is a data type that comes from [dartz](https://pub.dev/packages/dartz) package and is equivalent to `void`.
+`Unit` is a data type that comes from [dartz][] package and is equivalent to `void`.
+
+{: file='login_form_state.dart'}
 
 ```dart
 part of 'login_form_bloc.dart';
@@ -317,6 +333,8 @@ class LoginFormState with _$LoginFormState {
 
 `AuthFailure` is also a union class to represent authentication failure and because the authentication process might fail because of several reasons, we are using a union class.
 
+{: file='auth_failure.dart'}
+
 ```dart
 part 'auth_failure.freezed.dart';
 
@@ -331,13 +349,15 @@ class AuthFailure with _$AuthFailure {
 > _Since we ran the **build_runner watch** command earlier, we needn’t run the build command again. For some reason, if the build_runner watch command has stopped running, you will need to re-run the command._
 {: .prompt-tip }
 
-```shell
+```bash
 flutter pub run build_runner watch --delete-conflicting-outputs
 ```
 
 ### Bloc
 
 This is where the presentation logic is located.
+
+{: file='login_form_bloc.dart'}
 
 ```dart
 part 'login_form_bloc.freezed.dart';
@@ -418,25 +438,21 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
 
 Now all that is left is to create two TextFields and wrap them with the BlocBuilder widget.
 
-To check the remaining UI source code, I’d suggest you take a look at this [repo](https://github.com/Biplab-Dutta/form-validation) which contains the source code for the entire project.
+To check the remaining UI source code, I’d suggest you take a look at this [repo][Source Code] which contains the source code for the entire project.
 
 ## Conclusion
 
-This article demonstrated how you can perform form validation in Flutter using proper techniques and without having any business logic in the UI. There are several other ways to do the same thing. One of them happens to be [formz](https://pub.dev/packages/formz) package.
+This article demonstrated how you can perform form validation in Flutter using proper techniques and without having any business logic in the UI. There are several other ways to do the same thing. One of them happens to be [formz][] package.
 
 I hope after reading this article those who have been writing their validation logic in the UI, would now have such logic in the domain layer, keeping your presentation layer neat.
 
-If you wish to see some Flutter projects with proper architecture, follow me on [GitHub](https://github.com/Biplab-Dutta). I am also active on Twitter [@b_plab](https://twitter.com/b_plab98).
+If you wish to see some Flutter projects with proper architecture, follow me on [GitHub][GitHub-Biplab]. I am also active on Twitter [@b_plab][Twitter-Biplab] where I tweet about Flutter and Android.
 
-**[Source Code](https://github.com/Biplab-Dutta/form-validation)**
+**[Source Code][]**
 
 **My Socials:**
 
-- [GitHub](https://github.com/Biplab-Dutta)
-
-- [LinkedIn](https://www.linkedin.com/in/biplab-dutta-43774717a/)
-
-- [Twitter](https://twitter.com/b_plab98)
+|[GitHub][GitHub-Biplab]|[LinkedIn][LinkedIn-Biplab]|[Twitter][Twitter-Biplab]|
 
 Until next time, happy coding!!! 👨‍💻
 
@@ -444,4 +460,22 @@ Until next time, happy coding!!! 👨‍💻
 
 ## Credit
 
-[dormoshe.io](https://dormoshe.io/trending-news/form-validation-in-flutter-16654?utm_source=facebook&utm_campaign=facebook) for the preview image.
+[dormoshe.io][Preview Image] for the preview image.
+
+<!-- Hyperlinks 👇️ -->
+
+[Reso Coder Youtube]: https://www.youtube.com/c/ResoCoder
+[DDD video]: https://www.youtube.com/playlist?list=PLB6lc7nQ1n4iS5p-IezFFgqP6YvAJy84U
+[dartz]: https://pub.dev/packages/dartz
+[equatable]: https://pub.dev/packages/equatable
+[flutter_bloc]: https://pub.dev/packages/flutter_bloc
+[freezed_annotation]: https://pub.dev/packages/freezed_annotation
+[freezed]: https://pub.dev/packages/freezed
+[build_runner]: https://pub.dev/packages/build_runner
+[formz]: https://pub.dev/packages/formz
+[Either]: https://medium.com/disney-streaming/option-either-state-and-io-imperative-programming-in-a-functional-world-8e176049af81
+[Source Code]: https://github.com/Biplab-Dutta/form-validation
+[Twitter-Biplab]: https://twitter.com/b_plab98
+[GitHub-Biplab]: https://github.com/Biplab-Dutta/
+[LinkedIn-Biplab]: https://www.linkedin.com/in/biplab-dutta-43774717a/
+[Preview Image]: https://dormoshe.io/trending-news/form-validation-in-flutter-16654?utm_source=facebook&utm_campaign=facebook

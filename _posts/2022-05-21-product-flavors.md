@@ -11,7 +11,7 @@ image:
 
 Have you ever wondered how some mobile applications have admin and non-admin variants? The admin app has different UIs than the non-admin ones. Or have you seen some apps on the Play Store or App Store with premium and freemium versions? So, how do developers actually do it? How do they create multiple variants of the same project? Do they manage multiple codebases? Is there one team responsible for developing one variant and another team developing the other variant with 2 different codebases? And a clear and short answer to that is **NO**.
 
-It would be costly for companies to hire two different teams to create two different app variants. So, how is it possible? And unsurprisingly, the answer to that is using **[Product Flavor](https://developer.android.com/studio/build/build-variants#product-flavors)**.
+It would be costly for companies to hire two different teams to create two different app variants. So, how is it possible? And unsurprisingly, the answer to that is using **[Product Flavor][]**.
 
 As the name suggests, a product flavor (or a product variant) is a way to create multiple variants of your app from a single codebase. We can deploy these different apps independently in the relevant stores as well.
 
@@ -31,6 +31,8 @@ As the name suggests, a product flavor (or a product variant) is a way to create
 Now, we will begin creating our flavors. We will have an admin flavor and a non-admin flavor. I will keep the apps very simple and have them display a text saying **`This is the admin UI`** and **`This is the non-admin UI`**. In a real-world application, you can follow the same techniques that I will show you and have UIs accordingly the way you want.
 
 First, we will add a configuration in the app-level `build.gradle` file inside the `android` block.
+
+{: file='android/app/build.gradle'}
 
 ```groovy
 android {
@@ -61,11 +63,13 @@ android {
 
 Because we will have two different apps created, we want two different names for each of our applications. To do so, we will have to navigate to `/android/app/src/main/AndroidManifest.xml` file and edit `android:label`.
 
+{: file='android/app/src/main/AndroidManifest.xml'}
+
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.product_flavor_demo">
    <application
-        android:label="@string/app_name"      <!-- Edit this line -->
+        android:label="@string/app_name"      👈️ Edit this line
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -100,9 +104,9 @@ Because we will have two different apps created, we want two different names for
 
 Now, we need to create two `main.dart` files in our `lib` directory. We shall name them `main_admin.dart` and `main_non_admin.dart`.
 
-```dart
-// main_admin.dart
+{: file='main_admin.dart'}
 
+```dart
 // Add necessary imports
 
 void main() {
@@ -110,9 +114,9 @@ void main() {
 }
 ```
 
-```dart
-// main_non_admin.dart
+{: file='main_non_admin.dart'}
 
+```dart
 // Add necessary imports
 
 void main() {
@@ -164,7 +168,7 @@ First, create a `.vscode` folder in the root project directory. Then create a fi
 
 Now, if you go to the `Run and Debug` option in your VS Code or hold <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>, you will see a drop-down menu. On clicking it, you should see an option to debug your two different app variants.
 
-![vs code product flavor screenshot](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zo2s4i4u8411fra9bik7.png)
+![vs code product flavor screenshot][]
 
 ### For Android Studio Users
 
@@ -172,7 +176,7 @@ If you use Android Studio then you need to follow some of the steps that I’ll 
 
 Navigate to `Edit Configurations` option under the `Run` tab. It should open up a new window. Then you need to add configurations for each flavor.
 
-![Debug Configuration Window Android Studio](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/i76t2x5afzwcnuwkbd11.png)
+![Debug Configuration Window Android Studio 1][]
 
 In the `Dart entrypoint` option, add the path to `main_admin.dart` file using the browse option on the right-hand side. In the `Additional run args` option, add
 
@@ -182,7 +186,7 @@ In the `Dart entrypoint` option, add the path to `main_admin.dart` file using th
 
 Now, add another configuration for the non-admin app.
 
-![Debug Configuration Window Android Studio](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/g60fheqaniw2t1wjlbii.png)
+![Debug Configuration Window Android Studio 2][]
 
 Follow the same steps as mentioned above and in the `Additional run args` option, add
 
@@ -192,11 +196,13 @@ Follow the same steps as mentioned above and in the `Additional run args` option
 
 Now, we can select the proper configurations that we want to run and debug.
 
-![Debugger Android Studio](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/h2puhuqa5977gfuafsjy.png)
+![Debugger Android Studio][]
 
 The `dart-define` option that we have attached in our command is important to find out the app type on run time. We will see how we can use it to identify the app types.
 
 Create a new file `app_config.dart` inside the lib directory.
+
+{: file='app_config.dart'}
 
 ```dart
 abstract class AppConfig {
@@ -207,6 +213,8 @@ abstract class AppConfig {
 The value of `String.fromEnvironment()` comes from the `dart-define` option that we set earlier for each app variant. Now, using the `isAdminApp` boolean value, we can easily check if the app running currently is the admin app or the non-admin app and render UIs accordingly.
 
 Now create a new file `my_app.dart` inside the `lib` directory which will contain code for our `MyApp()` class. I am keeping it very simple to display different UI for each app variant. You can however take the idea and create as complex UI as you want for each app variant.
+
+{: file='my_app.dart'}
 
 ```dart
 // Add the necessary imports
@@ -276,17 +284,13 @@ On running both app flavors, we will have two different apps created with a sing
 
 We learned how we can have two different apps created with different UIs using a single codebase. I hope this blog post will be helpful for some of you reading if you ever encounter a situation where you’d have to create a similar project.
 
-If you wish to see some Flutter projects with proper architecture, follow me on [GitHub](https://github.com/Biplab-Dutta). I am also active on Twitter [@b_plab](https://twitter.com/b_plab98).
+If you wish to see some Flutter projects with proper architecture, follow me on [GitHub][GitHub-Biplab]. I am also active on Twitter [@b_plab][Twitter-Biplab] where I tweet about Flutter and Android.
 
-**[Source Code](https://github.com/Biplab-Dutta/product_flavor_demo)**
+**[Source Code][]**
 
 **My Socials:**
 
-- [GitHub](https://github.com/Biplab-Dutta)
-
-- [LinkedIn](https://www.linkedin.com/in/biplab-dutta-43774717a/)
-
-- [Twitter](https://twitter.com/b_plab98)
+|[GitHub][GitHub-Biplab]|[LinkedIn][LinkedIn-Biplab]|[Twitter][Twitter-Biplab]|
 
 Until next time, happy coding!!! 👨‍💻
 
@@ -294,4 +298,16 @@ Until next time, happy coding!!! 👨‍💻
 
 ## Credit
 
-[Glitch](https://glitchyhitchy.medium.com/) for the preview image.
+[Glitch][Preview Image] for the preview image.
+
+<!-- Hyperlinks 👇️ -->
+[Product Flavor]: https://developer.android.com/studio/build/build-variants#product-flavors
+[vs code product flavor screenshot]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zo2s4i4u8411fra9bik7.png
+[Debug Configuration Window Android Studio 1]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/i76t2x5afzwcnuwkbd11.png
+[Debug Configuration Window Android Studio 2]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/g60fheqaniw2t1wjlbii.png
+[Debugger Android Studio]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/h2puhuqa5977gfuafsjy.png
+[Twitter-Biplab]: https://twitter.com/b_plab98
+[GitHub-Biplab]: https://github.com/Biplab-Dutta/
+[LinkedIn-Biplab]: https://www.linkedin.com/in/biplab-dutta-43774717a/
+[Source Code]: https://github.com/Biplab-Dutta/product_flavor_demo
+[Preview Image]: https://glitchyhitchy.medium.com/

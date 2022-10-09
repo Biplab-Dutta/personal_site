@@ -8,9 +8,9 @@ tags: [flutter, dart, functional programming, either]
 
 Every application needs some data sources to receive the data and display it in the UI. So, it becomes very crucial how we, as developers, perform network requests. Handling API responses in an effective manner also determine the success or failure of our application.
 
-In this post, we will see how to perform such network requests effectively using [dio](https://pub.dev/packages/dio) and a bit of functional programming using the [dartz](https://pub.dev/packages/dartz) package. This will allow our overall architecture to remain consistent while making our project scalable and maintainable.
+In this post, we will see how to perform such network requests effectively using [dio][] and a bit of functional programming using the [dartz][] package. This will allow our overall architecture to remain consistent while making our project scalable and maintainable.
 
-> _If you wish to read this article in Bahasa Indonesia, you can find it [here](https://t.co/rpfOpMm3o0). [Yunus Afghoni](https://twitter.com/ghonijee?s=20&t=lMK4d9e4jKn7jVCN6_7iLQ) has done good work taking this article as a reference and translating it to Bahasa Indonesia, with some subtle changes._
+> _If you wish to read this article in Bahasa Indonesia, you can find it [here][translated-blog]. [Yunus Afghoni][Younus' Twitter] has done good work taking this article as a reference and translating it to Bahasa Indonesia, with some subtle changes._
 {: .prompt-info }
 
 <!-- omit in toc -->
@@ -27,11 +27,13 @@ In this post, we will see how to perform such network requests effectively using
 - [Other Solutions](#other-solutions)
 - [Conclusion](#conclusion)
 
-To follow along, make sure to include [dio](https://pub.dev/packages/dio) and [dartz](https://pub.dev/packages/dartz) as your dependencies in the `pubspec.yaml` file.
+To follow along, make sure to include [dio][] and [dartz][] as your dependencies in the `pubspec.yaml` file.
 
 ## Dio API Calls
 
 First thing first, let’s take a look at how I used to make network requests in Flutter a while back 😂 when I was still a beginner.
+
+{: file='feed_remote_data_source.dart'}
 
 ```dart
 class FeedRemoteDataSource {
@@ -60,7 +62,7 @@ The layers can be:
 
 - **Domain Layer** (consisting of entities and use-cases (optional))
 
-- **Data Layer** (consisting of [DTOs](https://en.wikipedia.org/wiki/Data_transfer_object), a repository, and data sources)
+- **Data Layer** (consisting of [DTOs][], a repository, and data sources)
 
 In this article, we will work closely with the Data Layer as it is what this article is about in the first place.
 
@@ -75,8 +77,8 @@ Since I talked about architecture, let me begin with what our architecture for t
 
 ## Data Layer Architecture
 
-![Data Layer Architecture](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bvp87zh3qnjv4a9pn3vo.png)
-*Data Layer (Image by [Reso Coder](https://twitter.com/resocoder))*
+![Data Layer Architecture Diagramatic Representation][]
+*Data Layer (Image by [Reso Coder][Reso Coder's Twitter])*
 
 So, our data layer would consist of three parts:
 
@@ -89,6 +91,8 @@ So, our data layer would consist of three parts:
 ### Data Transfer Objects (DTOs)
 
 First, let’s see how our `feed_dto.dart` would look like.
+
+{: file='feed_dto.dart'}
 
 ```dart
 part 'user_dto.freezed.dart';
@@ -113,12 +117,12 @@ class FeedDTO with _$FeedDTO {
 }
 ```
 
-You will also need to have [freezed](https://pub.dev/packages/freezed) included in your project as a dev-dependency along with [build_runner](https://pub.dev/packages/build_runner). Also, include [freezed_annotation](https://pub.dev/packages/freezed_annotation) as a dependency.
+You will also need to have [freezed][] included in your project as a dev-dependency along with [build_runner][]. Also, include [freezed_annotation][] as a dependency.
 
 > _freezed is a code generator for data-classes/unions/pattern-matching/cloning._
 {: .prompt-info }
 
-Next, you will need to have the required code generated which [freezed](https://pub.dev/packages/freezed) and [build_runner](https://pub.dev/packages/build_runner) will take care of. Run the following command to initialize code generation.
+Next, you will need to have the required code generated which [freezed][] and [build_runner][] will take care of. Run the following command to initialize code generation.
 
 ```bash
 flutter pub run build_runner watch --delete-conflicting-outputs
@@ -126,7 +130,9 @@ flutter pub run build_runner watch --delete-conflicting-outputs
 
 ### Data Sources
 
-In this section, we will perform our network request using the [dio](https://pub.dev/packages/dio) package. Any exceptions that need to be thrown will be thrown in this section which then is handled by the **Repository**.
+In this section, we will perform our network request using the [dio][] package. Any exceptions that need to be thrown will be thrown in this section which then is handled by the **Repository**.
+
+{: file='feed_remote_data_source.dart'}
 
 ```dart
 class FeedRemoteDataSource {
@@ -167,7 +173,7 @@ extension DioErrorX on DioError {
 
 This is the main gateway for the data coming from several data sources. Also, the **ViewModel** communicates with the **Repository** to get the data and display it in the UI. And the conversion between DTO and the domain-level entity is also performed here.
 
-Now, how is our repository going to make it easy for us to handle exceptions so as to have a maintainable architecture? It’s simple. We use **[Either](https://medium.com/disney-streaming/option-either-state-and-io-imperative-programming-in-a-functional-world-8e176049af81)**.
+Now, how is our repository going to make it easy for us to handle exceptions so as to have a maintainable architecture? It’s simple. We use **[Either][]**.
 
 > _`Either` is an entity whose value can be of two different types, called left and right. By convention, `Right` is for the success case and `Left` is for the error one. It’s a common pattern in the functional community._
 {: .prompt-info }
@@ -175,6 +181,8 @@ Now, how is our repository going to make it easy for us to handle exceptions so 
 It might be difficult to get a grasp on `Either` just by looking at its definition. So, let’s take a look at our repository implementation which will help us understand `Either` easily.
 
 The `FeedRepositoryImpl` class implements `FeedRepository` which is a simple abstract class. The `FeedRepositoryImpl` is dependent on our `FetchRemoteDataSource`.
+
+{: file='feed_repository.dart'}
 
 ```dart
 abstract class FeedRepository {
@@ -214,7 +222,9 @@ If you are thinking the same, then it’s just as simple as it can get.
 
 In our case, the `getFeeds()` returns `Future<Either<Failure, List<Feed>>>` meaning either `Failure` or `List<Feed>` . And because we are dealing with asynchronous code, we also have `Future`.
 
-`Failure` is just a simple union class that is created using [freezed](https://pub.dev/packages/freezed) package.
+`Failure` is just a simple union class that is created using [freezed][] package.
+
+{: file='failure.dart'}
 
 ```dart
 part 'failure.freezed.dart';
@@ -234,14 +244,16 @@ flutter pub run build_runner watch --delete-conflicting-outputs
 
 So, our repository implementation is pretty straightforward now. If the remote data source returns relevant data, then the repository will return `Right` i.e. `List<Feed>` else it returns `Left` i.e. `Failure`. Notice how the exceptions that were wildly being thrown from the remote data source are now gone because the repository implementation returns the Dart object. 🤩
 
-This way, we also reduce the risk of the [error bubble](https://www.linkedin.com/pulse/error-handling-let-bubble-up-mihael-schmidt/).
+This way, we also reduce the risk of the [error bubble][].
 
 ## BLoC / ViewModel
 
-So, how exactly are we going to deal with the obtained result from the **repository** in the presentation layer? For that, we will need to create a **bloc** that will be dependent on the **repository**. I prefer using [flutter_bloc](https://pub.dev/packages/flutter_bloc) for state management purposes.
+So, how exactly are we going to deal with the obtained result from the **repository** in the presentation layer? For that, we will need to create a **bloc** that will be dependent on the **repository**. I prefer using [flutter_bloc][] for state management purposes.
 
 > _You needn’t use flutter_bloc to follow along. Any state management solution is fine._ 👍️
 {: .prompt-tip }
+
+{: file='timeline_event.dart'}
 
 ```dart
 part of 'timeline_bloc.dart';
@@ -253,6 +265,8 @@ class TimelineEvent with _$TimelineEvent {
 }
 ```
 
+{: file='timeline_state.dart'}
+
 ```dart
 part of 'timeline_bloc.dart';
 
@@ -263,6 +277,8 @@ class TimelineState with _$TimelineState {
   const factory TimelineState.failed() = _Failed;
 }
 ```
+
+{: file='timeline_bloc.dart'}
 
 ```dart
 class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
@@ -294,28 +310,45 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
 In the `_onFeedFetched()` method above, the instance of the class implementing **FeedRepository** (the abstract class) is used to call the `getFeeds()` method which returns an `Either` type (stored in `fetchedFeed`). We use `fold` method to emit proper state depending on the result of `_repository.getFeeds().`
 The `fold` accepts to functions as its argument. The first function is used to perform an action when `Failure` is returned, whereas the second function is used to perform an action when a `Success` is returned. `Success` in our case refers to `List<Feed>`.
 
-Now, from our UI, we can use [BlocBuilder](https://pub.dev/packages/flutter_bloc#blocbuilder) to rebuild our widget on certain state changes.
+Now, from our UI, we can use [BlocBuilder][] to rebuild our widget on certain state changes.
 
 ## Other Solutions
 
-There are many other ways to effectively handle exceptions in our Flutter project. We can also rely on sealed classes. A good example of it can be found [here](https://getstream.io/blog/modeling-retrofit-responses/).
+There are many other ways to effectively handle exceptions in our Flutter project. We can also rely on sealed classes. A good example of it can be found [here][getstream blog].
 
 ## Conclusion
 
-In this article, you saw how to implement network requests in Flutter in a proper manner. We learned how we can use [dio](https://pub.dev/packages/dio), [freezed](https://pub.dev/packages/freezed), [dartz](https://pub.dev/packages/dartz), and a few other architectural overviews that can help us in making our app more maintainable, and testable and ultimately help us in becoming a better developer.
+In this article, you saw how to implement network requests in Flutter in a proper manner. We learned how we can use [dio][], [freezed][], [dartz][], and a few other architectural overviews that can help us in making our app more maintainable, and testable and ultimately help us in becoming a better developer.
 
 Also, this happens to be my very first blog. I know there are room for improvements and therefore, I seek feedback from the community.
 
-If you wish to see some Flutter projects with proper architecture, follow me on [GitHub](https://github.com/Biplab-Dutta/). I am also active on Twitter [@b_plab](https://twitter.com/b_plab98).
+If you wish to see some Flutter projects with proper architecture, follow me on [GitHub][Github-Biplab]. I am also active on Twitter [@b_plab][Twitter-Biplab] where I tweet about Flutter and Android.
 
 **My Socials:**
 
-- [GitHub](https://github.com/Biplab-Dutta/)
-
-- [LinkedIn](https://www.linkedin.com/in/biplab-dutta-43774717a/)
-
-- [Twitter](https://twitter.com/b_plab98)
+|[GitHub][GitHub-Biplab]|[LinkedIn][LinkedIn-Biplab]|[Twitter][Twitter-Biplab]|
 
 Until next time, happy coding!!! 👨‍💻
 
 — Biplab Dutta
+
+<!-- Hyperlinks 👇️ -->
+
+[flutter_bloc]: https://pub.dev/packages/flutter_bloc
+[dio]: https://pub.dev/packages/dio
+[dartz]: https://pub.dev/packages/dartz
+[freezed]: https://pub.dev/packages/freezed
+[build_runner]: https://pub.dev/packages/build_runner
+[freezed_annotation]: https://pub.dev/packages/freezed_annotation
+[BlocBuilder]: https://pub.dev/packages/flutter_bloc#blocbuilder
+[translated-blog]: https://t.co/rpfOpMm3o0
+[Younus' Twitter]:https://twitter.com/ghonijee?s=20&t=lMK4d9e4jKn7jVCN6_7iLQ
+[DTOs]: https://en.wikipedia.org/wiki/Data_transfer_object
+[Data Layer Architecture Diagramatic Representation]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bvp87zh3qnjv4a9pn3vo.png
+[Reso Coder's Twitter]: https://twitter.com/resocoder
+[Either]: https://medium.com/disney-streaming/option-either-state-and-io-imperative-programming-in-a-functional-world-8e176049af81
+[error bubble]: https://www.linkedin.com/pulse/error-handling-let-bubble-up-mihael-schmidt/
+[getstream blog]: https://getstream.io/blog/modeling-retrofit-responses/
+[Github-Biplab]: https://github.com/Biplab-Dutta/
+[Twitter-Biplab]: https://twitter.com/b_plab98
+[LinkedIn-Biplab]: https://www.linkedin.com/in/biplab-dutta-43774717a/

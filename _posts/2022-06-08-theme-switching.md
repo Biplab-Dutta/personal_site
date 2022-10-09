@@ -33,13 +33,13 @@ Every mobile app user prefers having an option to choose between multiple themes
 
 Let’s take a look at our final app.
 
-![flutter-theme-switching-demo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bs1jwa9pgp858t2gyiy9.gif)
+![flutter-theme-switching-demo][demo-app-gif]
 
 As we can see in the GIF, our app allows us to switch between dark theme and light theme. Also, the icon on the floating action button changes dynamically. And the chosen theme is persisted which can be witnessed in every app launch.
 
 ## Dependencies
 
-Before we begin working on the code, let’s first include some external packages that we will need. Include [flutter_bloc](https://pub.dev/packages/flutter_bloc), [shared_preferences](https://pub.dev/packages/shared_preferences), and [equatable](https://pub.dev/packages/equatable) as your dependencies in `pubspec.yaml` file.
+Before we begin working on the code, let’s first include some external packages that we will need. Include [flutter_bloc][], [shared_preferences][], and [equatable][] as your dependencies in `pubspec.yaml` file.
 
 ## Let’s Code 👨‍💻
 
@@ -48,6 +48,8 @@ Since this is a very simple app, I won’t be concerned about app architecture i
 ### Theme Configurations
 
 First, start a new flutter project and get rid of the default counter app. Then inside the lib folder, create a file `app_theme.dart`.
+
+{: file='app_theme.dart'}
 
 ```dart
 import 'package:flutter/material.dart';
@@ -89,6 +91,8 @@ abstract class AppTheme {
 
 Then create a `theme_repository.dart` file inside the lib directory and paste the following code.
 
+{: file='theme_repository.dart'}
+
 ```dart
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -128,6 +132,8 @@ If we had a `Future` implementation for `getTheme()`, after every theme update, 
 {: .prompt-tip }
 
 Now, we will add code to our `getTheme()` and `saveTheme()` methods.
+
+{: file='theme_repository.dart'}
 
 ```dart
 import 'package:shared_preferences/shared_preferences.dart';
@@ -173,6 +179,8 @@ We initialized a `StreamController` which will act as a manager for our `Stream<
 Everything looks fine. But if you see it carefully, the method `getTheme()` yields the stream from the controller. But initially, as the app is launched, there would be no stream in the controller. Then how do we deal with it?
 
 The solution is simple. We can add a constructor body that would be executed as soon as the `ThemeRepository` class is instantiated. Also, `getTheme()` is a method that would be called in the very early stage. So, we need to make sure that before the `getTheme()` method is called, there is some stream value in the controller. So, add a `_init()` method in the constructor body and instantiate the `ThemeRepository` in the `main.dart` file later. Then, the final version of our `theme_repository.dart` file would look like this:
+
+{: file='theme_repository.dart'}
 
 ```dart
 import 'dart:async';
@@ -246,8 +254,9 @@ Also, you may have noticed I used a `CustomTheme` enum that I created in this fi
 
 Now, we will create a `ThemeCubit` and `ThemeClass` class that will be responsible for our state handling. Create a folder in the lib directory and name it `them_cubit`. Inside `theme_cubit`, create two dart files — `theme_cubit.dart` and `theme_state.dart`.
 
+{: file='theme_state.dart'}
+
 ```dart
-// theme_state.dart
 
 part of 'theme_cubit.dart';
 
@@ -266,9 +275,9 @@ class ThemeState extends Equatable {
 }
 ```
 
-```dart
-// theme_cubit.dart
+{: file='theme_cubit.dart'}
 
+```dart
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -332,6 +341,8 @@ The code is self-explanatory and I have added all the necessary explanations thr
 
 Let’s add some code to the `main.dart` file.
 
+{: file='main.dart'}
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -355,6 +366,8 @@ Future<void> main() async {
 ### App Widget
 
 Next, create a `app.dart` file in the lib directory and paste the following code.
+
+{: file='app.dart'}
 
 ```dart
 import 'package:flutter/material.dart';
@@ -411,6 +424,8 @@ class AppView extends StatelessWidget {
 
 Create a file `home_page.dart` and add the following code.
 
+{: file='home_page.dart'}
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -462,23 +477,19 @@ class HomePage extends StatelessWidget {
 
 ## Other solutions
 
-There are many other ways of doing the same thing that I showed in this article. You could also use [hydrated_bloc](https://pub.dev/packages/hydrated_bloc) instead of cubits to manage the state and persist it. However, I wanted to show you how you could have done the persisting if you were working with other state management solutions other than flutter_bloc.
+There are many other ways of doing the same thing that I showed in this article. You could also use [hydrated_bloc][] instead of cubits to manage the state and persist it. However, I wanted to show you how you could have done the persisting if you were working with other state management solutions other than flutter_bloc.
 
 ## Conclusion
 
 This article showed how we can include theme switching and persisting feature in our Flutter app using the best practices. I hope you all got to learn from my article and if there’s any feedback for me, drop a comment. I’ll be sure to upload another article in a few days again.
 
-If you wish to see some Flutter projects with proper architecture, follow me on [GitHub](https://github.com/Biplab-Dutta). I am also active on Twitter [@b_plab](https://twitter.com/b_plab98).
+If you wish to see some Flutter projects with proper architecture, follow me on [GitHub][GitHub-Biplab]. I am also active on Twitter [@b_plab][Twitter-Biplab] where I tweet about Flutter and Android.
 
-**[Source Code for the project in this article](https://github.com/Biplab-Dutta/flutter_theme_switcher)**
+**[Source Code for the project in this article][Source Code]**
 
 **My Socials:**
 
-- [GitHub](https://github.com/Biplab-Dutta)
-
-- [LinkedIn](https://www.linkedin.com/in/biplab-dutta-43774717a/)
-
-- [Twitter](https://twitter.com/b_plab98)
+|[GitHub][GitHub-Biplab]|[LinkedIn][LinkedIn-Biplab]|[Twitter][Twitter-Biplab]|
 
 Until next time, happy coding!!! 👨‍💻
 
@@ -486,4 +497,17 @@ Until next time, happy coding!!! 👨‍💻
 
 ## Credit
 
-[raywenderlich.com](https://www.raywenderlich.com/16628777-theming-a-flutter-app-getting-started) for the preview image.
+[raywenderlich.com][Preview Image] for the preview image.
+
+<!-- Hyperlinks -->
+
+[flutter_bloc]: https://pub.dev/packages/flutter_bloc
+[shared_preferences]: https://pub.dev/packages/shared_preferences
+[equatable]: https://pub.dev/packages/equatable
+[hydrated_bloc]: https://pub.dev/packages/hydrated_bloc
+[GitHub-Biplab]: https://github.com/Biplab-Dutta
+[Twitter-Biplab]: https://twitter.com/b_plab98
+[LinkedIn-Biplab]: https://www.linkedin.com/in/biplab-dutta-43774717a/
+[Source Code]: https://github.com/Biplab-Dutta/flutter_theme_switcher
+[Preview Image]:https://www.raywenderlich.com/16628777-theming-a-flutter-app-getting-started
+[demo-app-gif]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bs1jwa9pgp858t2gyiy9.gif

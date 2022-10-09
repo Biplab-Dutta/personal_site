@@ -37,8 +37,8 @@ When talking about Streams, you must also be familiar with **StreamController** 
 
 To understand it more easily, imagine a pipe that has two ends. One for letting the water enter the pipe and the other for letting it out of the pipe. If you think about it, water freely flows inside of the pipe. Similarly, the StreamController has two ends — one for letting the data come in, and the other to let it exit. The data enters the StreamController via `Sink` . The data can also be modified before it is emitted.
 
-![Stream Representation in Dart](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ia3q9suzkyr60lz2f7hn.png)
-*Stream Representation (Image By: [Rajat Palankar](https://protocoderspoint.com/author/rajatrrpalankar/))*
+![Stream Representation in Dart][]
+*Stream Representation (Image By: [Rajat Palankar][])*
 
 Those parts of our application that are interested in our data stream need to listen to the emitted stream, also referred to as subscribing to the stream. Those who listen or subscribe to the stream are called **subscribers** or **listeners**. The stream can be listened to by one or many listeners. Depending on the number of listeners, the stream can be categorized into two parts:
 
@@ -58,8 +58,8 @@ But how is it going to help us anyway? If this is what you have been thinking, l
 > *A picture is worth a thousand words — Henrik Ibsen*
 {: .prompt-tip }
 
-![Steps in performing Network Request](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ijfywt0dfdesaa2teb2w.png)
-*Steps in performing Network Request — Future-based Approach (Image Source: [Android Developers](https://www.youtube.com/watch?v=fSB6_KE95bU&t=103s))*
+![Steps in performing Network Request][Future based network request image]
+*Steps in performing Network Request — Future-based Approach (Image Source: [Android Developers][Future based network request youtube video])*
 
 We can clearly understand what the above image illustrates. It shows how a developer can obtain necessary data from the server by following the shown steps:
 
@@ -82,8 +82,8 @@ While there is nothing wrong with this approach to performing network requests, 
 
 What is the better way of doing the same thing then? And the answer to that would be having a **reactive repository**. To illustrate this, see this image.
 
-![Steps in performing Network Request](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kh2aora96rupg40br9u0.png)
-*Steps in performing Network Request — Reactive Approach (Image Source: [Android Developers](https://www.youtube.com/watch?v=fSB6_KE95bU&t=129s))*
+![Steps in performing Network Request][Stream based network request image]
+*Steps in performing Network Request — Reactive Approach (Image Source: [Android Developers][Stream based network request youtube video])*
 
 This diagram has fewer steps than what we saw earlier. But how does this work? Let’s have a look at it.
 
@@ -118,7 +118,7 @@ This is what our final application looks like.
 ## Creating flutter project
 
 First, create a new Flutter project and get rid of the default counter app.
-Also, add [Equatable](https://pub.dev/packages/equatable) and [RxDart](https://pub.dev/packages/rxdart) packages to your `pubspec.yaml` file.
+Also, add [Equatable][] and [RxDart][] packages to your `pubspec.yaml` file.
 
 ```shell
 flutter create stream_demo
@@ -139,6 +139,8 @@ lib
 ### Domain Layer
 
 We will begin with the **Domain Layer** first. Inside the domain folder, create a file `models.dart` . And paste the following code.
+
+{: file='models.dart'}
 
 ```dart
 class User {
@@ -163,6 +165,8 @@ Next, we will work on the **Data Layer**. Create two files `repository.dart` and
 
 Now, add the following code to `remote_data_source.dart` file.
 
+{: file='remote_data_source.dart'}
+
 ```dart
 import 'package:stream_demo/domain/models.dart';
 
@@ -181,6 +185,8 @@ class RemoteDataSource {
 ```
 
 The above code simply returns a `List<User>` which will be returned by the Repository. So, add the following code to `repository.dart` file.
+
+{: file='repository.dart'}
 
 ```dart
 import 'dart:async';
@@ -239,7 +245,7 @@ class UserRepository {
 
 Here, the `UserRepository` is dependent on the `RemoteDataSource`. In the constructor body, we call `getUsers()` and the list of users is added to the **StreamController**.
 
-Also, we are using **BehaviorSubject** instead of a **StreamController**. BehaviorSubject comes from [RxDart](https://pub.dev/packages/rxdart) package. The package is simply an extension on Stream provided by Dart. Using BehaviorSubject, any new listeners when begin listening to the stream, they immediately get the lastly emitted Stream of data.
+Also, we are using **BehaviorSubject** instead of a **StreamController**. `BehaviorSubject` comes from [RxDart][] package. The package is simply an extension on Stream provided by Dart. Using `BehaviorSubject`, any new listeners when begin listening to the stream, they immediately get the lastly emitted Stream of data.
 
 > _We can think that `BehaviorSubject` has some kind of a caching mechanism that caches the latest emitted Stream immediately._
 {: .prompt-tip }
@@ -259,9 +265,9 @@ Now, we can work on the **Presentation Layer**. It will consist of bloc, widgets
 
 We will begin with the bloc. Add three files — `user_bloc.dart`, `user_event.dart`, and `user_state.dart`.
 
-```dart
-// user_event.dart
+{: file='user_event.dart'}
 
+```dart
 part of 'user_bloc.dart';
 
 abstract class UserEvent extends Equatable {
@@ -294,9 +300,9 @@ class UserInputChanged extends UserEvent {
 }
 ```
 
-```dart
-// user_state.dart
+{: file='user_state.dart'}
 
+```dart
 part of 'user_bloc.dart';
 
 enum UserStatus { initial, loading, success, failure }
@@ -328,9 +334,9 @@ class UserState extends Equatable {
 }
 ```
 
-```dart
-// user_bloc.dart
+{: file='user_bloc.dart'}
 
+```dart
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:stream_demo/data/repository.dart';
@@ -392,21 +398,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
 The event `UserRequested` is triggered as soon as the app is launched. The event `UserAdded` is triggered when we want to add the user to our existing list. And the `UserInputChanged` event exists to handle the event when we provide input to the text field.
 
-Now to create UI, I'd suggest you check my [GitHub repo](https://github.com/Biplab-Dutta/flutter-stream-bloc-simplified) as the UI code is pretty simple and I don't want to create this article very long for the readers to read.
+Now to create UI, I'd suggest you check my [GitHub repo][Source Code] as the UI code is pretty simple and I don't want to create this article very long for the readers to read.
 
 ## Conclusion
 
 This article aimed at making Streams and Reactive Programming easier to get used to. The reactive Approach can help in having a relatively small codebase, easier to manage, and most importantly having our application truly reactive.
 
-If you have anything to tell me, please do so. I will be looking forward to all the feedback I receive. You can also follow me on Twitter at [@b_plab98](https://twitter.com/b_plab98) where I tweet about Flutter and Android.
+If you have anything to tell me, please do so. I will be looking forward to all the feedback I receive. You can also follow me on Twitter [@b_plab98][Twitter-Biplab] where I tweet about Flutter and Android.
 
 **My Socials:**
 
-- [GitHub](https://github.com/Biplab-Dutta/)
-
-- [LinkedIn](https://www.linkedin.com/in/biplab-dutta-43774717a/)
-
-- [Twitter](https://twitter.com/b_plab98)
+|[GitHub][GitHub-Biplab]|[LinkedIn][LinkedIn-Biplab]|[Twitter][Twitter-Biplab]|
 
 Until next time, happy coding!!! 👨‍💻
 
@@ -414,4 +416,20 @@ Until next time, happy coding!!! 👨‍💻
 
 ## Credit
 
-[West Agile Labs](https://www.westagilelabs.com/blog/five-interesting-facts-about-reactive-programming-frameworks/) for the preview image.
+[West Agile Labs][Preview Image] for the preview image.
+
+<!-- Hyperlinks 👇️ -->
+
+[Stream Representation in Dart]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ia3q9suzkyr60lz2f7hn.png
+[Rajat Palankar]: https://protocoderspoint.com/author/rajatrrpalankar/
+[Future based network request image]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ijfywt0dfdesaa2teb2w.png
+[Stream based network request image]: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kh2aora96rupg40br9u0.png
+[Future based network request youtube video]: https://www.youtube.com/watch?v=fSB6_KE95bU&t=103s
+[Stream based network request youtube video]: https://www.youtube.com/watch?v=fSB6_KE95bU&t=129s
+[Equatable]: https://pub.dev/packages/equatable
+[RxDart]: https://pub.dev/packages/rxdart
+[Source Code]: https://github.com/Biplab-Dutta/flutter-stream-bloc-simplified
+[Twitter-Biplab]: https://twitter.com/b_plab98
+[GitHub-Biplab]: https://github.com/Biplab-Dutta/
+[LinkedIn-Biplab]: https://www.linkedin.com/in/biplab-dutta-43774717a/
+[Preview Image]: https://www.westagilelabs.com/blog/five-interesting-facts-about-reactive-programming-frameworks/
