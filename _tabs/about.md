@@ -18,6 +18,6 @@ Hello 👋
 
 ### 📊 Statistics
 
-<p style="text-align:left;"><img src="https://github-readme-stats.vercel.app/api?username=Biplab-Dutta&show_icons=true&theme=radical" alt="Biplab's GitHub stats"></p>
+<p style="text-align:left;"><img src="https://github-readme-stats-biplab.vercel.app/api?username=Biplab-Dutta&show_icons=true&theme=radical" alt="Biplab's GitHub stats"></p>
 
-<p style="text-align:left;"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Biplab-Dutta&layout=compact&theme=radical" alt="Biplab's Top Langs"></p>
+<p style="text-align:left;"><img src="https://github-readme-stats-biplab.vercel.app/api/top-langs/?username=Biplab-Dutta&layout=compact&theme=radical" alt="Biplab's Top Langs"></p>
