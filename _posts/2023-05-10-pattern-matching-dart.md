@@ -26,7 +26,7 @@ With the arrival of Dart 3, it brings many new features to the Dart language.  F
   - [Object Destructuring](#object-destructuring)
 - [Guard Clauses](#guard-clauses)
 - [Sealed class and pattern matching](#sealed-class-and-pattern-matching)
-- [Logical \& Relational operators in switch case](#logical--relational-operators-in-switch-case)
+- [Logical & Relational operators in switch case](#logical--relational-operators-in-switch-case)
 - [If-case Statements](#if-case-statements)
 - [Control Flow in Argument Lists](#control-flow-in-argument-lists)
 - [Conclusion](#conclusion)
@@ -43,7 +43,7 @@ Now, let us get started with the major introductions in this new segment.
 ```dart
 final x = (1, 2, 'a'); // Here, x is a record with the type (int, int, String)
 
-final y = (x: 'value', 5); // Here, y is a record having the type ({String x}, int) with the first field being named and second being positional
+final y = (x: 'value', 5); // Here, y is a record having the type (int, {String x}) with the first field being named and second being positional
 ```
 
 > _It is important to realize that if our record contains only one positional field, then there **MUST** be a trailing comma before the closing parenthesis._
