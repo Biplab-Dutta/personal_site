@@ -423,7 +423,7 @@ void main() {
 }
 ```
 
-The display method above could be re-written as:
+The `display()` method above could be re-written as:
 
 ```dart
 String display(Shape shape) {
@@ -490,7 +490,7 @@ print(reaction); // Noice
 {: .prompt-info }
 
 ## If-case Statements
-Always using switch cases can be verbose. So, Drat 3 also provides us with the new if-case statements. It allows us to add a single pattern inside the if check and perform certain actions.
+Always using switch cases can be verbose. So, Dart 3 also provides us with the new if-case statements. It allows us to add a single pattern inside the if check and perform certain actions.
 
 ```dart
 void main() {
