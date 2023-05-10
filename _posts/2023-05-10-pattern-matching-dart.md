@@ -26,7 +26,7 @@ With the arrival of Dart 3, it brings many new features to the Dart language.  F
   - [Object Destructuring](#object-destructuring)
 - [Guard Clauses](#guard-clauses)
 - [Sealed class and pattern matching](#sealed-class-and-pattern-matching)
-- [Logical \& Relational operatora in switch case](#logical--relational-operatora-in-switch-case)
+- [Logical \& Relational operators in switch case](#logical--relational-operatora-in-switch-case)
 - [If-case Statements](#if-case-statements)
 - [Control Flow in Argument Lists](#control-flow-in-argument-lists)
 - [Conclusion](#conclusion)
