@@ -448,7 +448,7 @@ String display(Shape shape) {
 }
 ```
 
-## Logical & Relational operatora in switch case
+## Logical & Relational operators in switch case
 
 ```dart
 void main() {
