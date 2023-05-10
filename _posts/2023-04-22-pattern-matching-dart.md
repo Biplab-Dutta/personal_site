@@ -11,6 +11,26 @@ image:
 
 With the arrival of Dart 3, it brings many new features to the Dart language.  Features like records, pattern matching, guard clauses, logical and relational operators in switch cases, if-case statements, pattern/object destructuring, multiple returns, and many more will be added. This article aims to familiarize the readers with these upcoming features in the Dart language.
 
+- [Record](#record)
+- [Why/When would I want to use a record? 🤔](#whywhen-would-i-want-to-use-a-record-)
+- [Record Type Annotations](#record-type-annotations)
+  - [Record with positional fields](#record-with-positional-fields)
+  - [Record with named fields](#record-with-named-fields)
+  - [Record with named and positional fields](#record-with-named-and-positional-fields)
+- [Destructuring](#destructuring)
+  - [Destructuring positional fields](#destructuring-positional-fields)
+  - [Destructuring named fields](#destructuring-named-fields)
+  - [Destructuring positional and named fields](#destructuring-positional-and-named-fields)
+  - [JSON Destructuring](#json-destructuring)
+  - [Object Destructuring](#object-destructuring)
+- [Guard Clauses](#guard-clauses)
+- [Sealed class and pattern matching](#sealed-class-and-pattern-matching)
+- [Logical \& Relational operatora in switch case](#logical--relational-operatora-in-switch-case)
+- [If-case Statements](#if-case-statements)
+- [Control Flow in Argument Lists](#control-flow-in-argument-lists)
+- [Conclusion](#conclusion)
+- [Credit](#credit)
+
 > _All the code in this blog has been tested in the Dart's master channel. You can try running the examples shown in this blog on [Dartpad][Dartpad master branch] and switching the channel from stable (by defualt) to master._
 {: .prompt-info }
 
@@ -536,6 +556,10 @@ Until next time, happy coding!!! 👨‍💻
 
 — Biplab Dutta
 
+## Credit
+
+[Sandro Maglione][] for the preview image.
+
 <!-- Hyperlinks -->
 [Dartpad master branch]: <https://dartpad.dev/?channel=master>
 [Implicit break]: <https://github.com/dart-lang/language/blob/main/accepted/future-releases/0546-patterns/feature-specification.md#implicit-break>
@@ -545,3 +569,4 @@ Until next time, happy coding!!! 👨‍💻
 [Twitter-Biplab]: https://twitter.com/b_plab98
 [GitHub-Biplab]: https://github.com/Biplab-Dutta/
 [LinkedIn-Biplab]: https://www.linkedin.com/in/biplab-dutta-43774717a/
+[Sandro Maglione]: https://twitter.com/SandroMaglione
