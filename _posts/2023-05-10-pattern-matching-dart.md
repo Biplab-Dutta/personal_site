@@ -11,6 +11,7 @@ image:
 
 With the arrival of Dart 3, it brings many new features to the Dart language.  Features like records, pattern matching, guard clauses, logical and relational operators in switch cases, if-case statements, pattern/object destructuring, multiple returns, and many more will be added. This article aims to familiarize the readers with these upcoming features in the Dart language.
 
+## Table of Contents
 - [Record](#record)
 - [Why/When would I want to use a record? 🤔](#whywhen-would-i-want-to-use-a-record-)
 - [Record Type Annotations](#record-type-annotations)
