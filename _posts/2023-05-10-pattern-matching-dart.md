@@ -508,7 +508,7 @@ void main() {
 }
 ```
 
-The above code is readed as if the json follows the given pattern inside the if statement, then print firstEvent and secondEvent else print Invalid JSON.
+The above code is read as if the json follows the given pattern inside the if statement, then print firstEvent and secondEvent else print Invalid JSON.
 
 
 ## Control Flow in Argument Lists
