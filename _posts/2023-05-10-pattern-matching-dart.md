@@ -439,7 +439,7 @@ String display(Shape shape) {
 }
         // OR
 
-int display(Shape shape) {
+String display(Shape shape) {
   return switch (shape) {
     Square() => 'Square',
     Circle() => 'Circle',
