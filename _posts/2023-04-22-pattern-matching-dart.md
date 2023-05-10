@@ -1,7 +1,7 @@
 ---
 author: Biplab
 title: An introduction to Records and Pattern Matching in Dart & FLutter
-date: 2023-04-10 9:00:00 +545
+date: 2023-05-10 9:00:00 +545
 categories: [flutter]
 tags: [flutter, dart, records, pattern matching, object matching, sealed classes]
 image:
