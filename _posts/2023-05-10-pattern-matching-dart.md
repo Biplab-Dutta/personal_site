@@ -9,7 +9,7 @@ image:
   alt: Preview Image Credit - Sandro Maglione
 ---
 
-With the arrival of Dart 3, it brings many new features to the Dart language.  Features like records, pattern matching, guard clauses, logical and relational operators in switch cases, if-case statements, pattern/object destructuring, multiple returns, and many more will be added. This article aims to familiarize the readers with these upcoming features in the Dart language.
+With the arrival of Dart 3, it brings many new features to the Dart language. Features like records, pattern matching, guard clauses, logical and relational operators in switch cases, if-case statements, pattern/object destructuring, multiple returns, and many more will be added. This article aims to familiarize the readers with these upcoming features in the Dart language.
 
 ## Table of Contents
 - [Record](#record)
@@ -32,7 +32,7 @@ With the arrival of Dart 3, it brings many new features to the Dart language.  F
 - [Conclusion](#conclusion)
 - [Credit](#credit)
 
-> _All the code in this blog has been tested in the Dart's master channel. You can try running the examples shown in this blog on [Dartpad][Dartpad master branch] and switching the channel from stable (by defualt) to master._
+> _All the codes in this blog have been tested in the Dart's master channel. You can try running the examples shown in this blog on [Dartpad][Dartpad master branch] and switching the channel from stable (by defualt) to master._
 {: .prompt-info }
 
 Now, let us get started with the major introductions in this new segment.
