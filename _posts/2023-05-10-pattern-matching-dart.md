@@ -12,6 +12,7 @@ image:
 With the arrival of Dart 3, it brings many new features to the Dart language. Features like records, pattern matching, guard clauses, logical and relational operators in switch cases, if-case statements, pattern/object destructuring, multiple returns, and many more will be added. This article aims to familiarize the readers with these upcoming features in the Dart language.
 
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Record](#record)
 - [Why/When would I want to use a record? 🤔](#whywhen-would-i-want-to-use-a-record-)
 - [Record Type Annotations](#record-type-annotations)
@@ -50,8 +51,8 @@ final y = (x: 'value', 5); // Here, y is a record having the type (int, {String 
 {: .prompt-info }
 
 ```dart
-final x = ('a'); // Compile-time error
-final y = ('a',) // 👌
+(String) x = ('a'); // Compile-time error
+(String,) y = ('a',) // 👌
 ```
 
 > _The expression `()` refers to the constant empty record with no fields._
@@ -512,6 +513,10 @@ The above code is read as if the json follows the given pattern inside the if st
 
 
 ## Control Flow in Argument Lists
+
+> _This feature will not immediately be available in Dart 3. It is still a work being discussed.But since this feature is only possible with Records & Patterns into play, I decided to add it in this blog._
+{: .prompt-info }
+
 While writing Flutter code, we often write if checks inside collection literals such as inside the children property of a Row or a Column. This helps in writing clean code and avoid ugly imperative code.
 But sometimes, there are child widgets that need some conditional behaviour are inside named arguments and the best we can do is use ternary operator. Such as:
 
