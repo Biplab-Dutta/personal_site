@@ -53,6 +53,9 @@ final y = (x: 'value', 5); // Here, y is a record having the type (int, {String 
 ```dart
 (String) x = ('a'); // Compile-time error
 (String,) y = ('a',) // 👌
+
+final z = ('a'); // Here, z is a String type
+final z = ('a',); // Here, z is a record with (String) type
 ```
 
 > _The expression `()` refers to the constant empty record with no fields._
