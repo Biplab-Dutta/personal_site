@@ -27,6 +27,11 @@ GEM
       ffi (>= 1.15.0)
     eventmachine (1.2.7)
     ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2-aarch64-linux-musl)
+    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux-musl)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
     fiber-annotation (0.2.0)
@@ -34,7 +39,16 @@ GEM
       fiber-storage
     fiber-storage (1.0.1)
     forwardable-extended (2.6.0)
+    google-protobuf (4.30.2)
+      bigdecimal
+      rake (>= 13)
     google-protobuf (4.30.2-aarch64-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.30.2-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.30.2-x86_64-darwin)
       bigdecimal
       rake (>= 13)
     google-protobuf (4.30.2-x86_64-linux)
@@ -109,6 +123,16 @@ GEM
     metrics (0.12.2)
     nokogiri (1.18.8-aarch64-linux-gnu)
       racc (~> 1.4)
+    nokogiri (1.18.8-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-musl)
@@ -134,6 +158,16 @@ GEM
     safe_yaml (1.0.5)
     sass-embedded (1.87.0-aarch64-linux-gnu)
       google-protobuf (~> 4.30)
+    sass-embedded (1.87.0-aarch64-linux-musl)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.87.0-arm-linux-gnueabihf)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.87.0-arm-linux-musleabihf)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.87.0-arm64-darwin)
+      google-protobuf (~> 4.30)
+    sass-embedded (1.87.0-x86_64-darwin)
+      google-protobuf (~> 4.30)
     sass-embedded (1.87.0-x86_64-linux-gnu)
       google-protobuf (~> 4.30)
     sass-embedded (1.87.0-x86_64-linux-musl)
@@ -151,8 +185,16 @@ GEM
     zeitwerk (2.7.2)
 
 PLATFORMS
-  aarch64-linux
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-gnueabihf
+  arm-linux-musl
+  arm-linux-musleabihf
+  arm64-darwin
+  x86_64-darwin
   x86_64-linux
+  x86_64-linux-gnu
   x86_64-linux-musl
 
 DEPENDENCIES
@@ -163,4 +205,4 @@ DEPENDENCIES
   wdm (~> 0.2.0)
 
 BUNDLED WITH
-   2.3.22
+   2.6.7
