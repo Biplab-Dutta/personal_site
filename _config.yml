@@ -23,7 +23,7 @@ timezone: Asia/Kathmandu
 
 title: Biplab Dutta # the main title
 
-tagline: Flutter Developer # it will display as the sub-title
+tagline: Mobile App Developer # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   My name is Biplab Dutta. I am from Nepal working as a mobile application developer (native Android and Flutter).
@@ -49,9 +49,9 @@ social:
   name: Biplab Dutta
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/b_plab98 # change to your twitter homepage
-
+    - https://www.linkedin.com/in/biplab-dutta-43774717a/
     - https://github.com/Biplab-Dutta # change to your github homepage
+    - https://twitter.com/b_plab98 # change to your twitter homepage
 
 google_site_verification: # fill in to your verification string
 
